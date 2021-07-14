@@ -5,8 +5,8 @@ function Navbar() {
         <Box display="flex" justifyContent="space-between" className="navbar">
             <div className="logo">TRADE</div>
             <Box display="flex" justifyContent="flex-end">
-                <div className="button">LOGIN</div>
-                <div className="button">REGISTER</div>
+                <div className="button link">LOGIN</div>
+                <div className="button link">REGISTER</div>
             </Box>
         </Box>
     )

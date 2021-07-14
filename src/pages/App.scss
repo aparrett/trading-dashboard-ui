@@ -17,6 +17,11 @@ html {
     color: $color-tan-medium;
     padding: 8px 14px;
     font-size: 24px;
+
+    &:hover {
+        cursor: pointer;
+        color: $color-red;
+    }
 }
 
 .button {
@@ -25,4 +30,9 @@ html {
     color: $color-tan-light;
     font-weight: bold;
     background-color: $color-black;
+
+    &:hover {
+        cursor: pointer;
+        color: $color-red;
+    }
 }
