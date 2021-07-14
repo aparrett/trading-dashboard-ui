@@ -1,0 +1,28 @@
+@import '../styles/shared.scss';
+
+html {
+    background: $color-tan-light;
+}
+
+.navbar {
+    margin-top: 2px;
+
+    .button {
+        margin: 3px 5px 3px 0;
+    }
+}
+
+.logo {
+    font-family: 'Zen Tokyo Zoo', cursive;
+    color: $color-tan-medium;
+    padding: 8px 14px;
+    font-size: 24px;
+}
+
+.button {
+    padding: 12px;
+    font-size: 12px;
+    color: $color-tan-light;
+    font-weight: bold;
+    background-color: $color-black;
+}
