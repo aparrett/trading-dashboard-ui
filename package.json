@@ -12,6 +12,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "apollo-client": "^2.6.10",
+    "formik": "^2.2.9",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",
     "node-sass": "^5.0.0",

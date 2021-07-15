@@ -1,14 +1,22 @@
 import { Box } from '@material-ui/core'
+import { FC, useState } from 'react'
+import RegisterDialog from './RegisterDialog'
 
-function Navbar() {
+const Navbar: FC = () => {
+    // const [showLoginDialog, setShowLoginDialog] = useState(false)
+    const [showRegisterDialog, setShowRegisterDialog] = useState(false)
+
     return (
-        <Box display="flex" justifyContent="space-between" className="navbar">
-            <div className="logo">TRADE</div>
-            <Box display="flex" justifyContent="flex-end">
-                <div className="button link">LOGIN</div>
-                <div className="button link">REGISTER</div>
+        <div>
+            <Box display="flex" justifyContent="space-between" className="navbar">
+                <div className="logo">TRADE</div>
+                <Box display="flex" justifyContent="flex-end">
+                    <div className="button link">LOGIN</div>
+                    <div className="button link" onClick={() => setShowRegisterDialog(true)}>REGISTER</div>
+                </Box>
             </Box>
-        </Box>
+            <RegisterDialog open={showRegisterDialog} onClose={() => setShowRegisterDialog(false)} />
+        </div>
     )
 }
 

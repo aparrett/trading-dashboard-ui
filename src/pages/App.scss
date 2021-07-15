@@ -24,6 +24,10 @@ html {
     }
 }
 
+button {
+    border: none!important;
+}
+
 .button {
     padding: 12px;
     font-size: 12px;
@@ -35,4 +39,51 @@ html {
         cursor: pointer;
         color: $color-red;
     }
+
+    &.light {
+        background-color: $color-tan-light-2;
+        color: $color-tan-dark;
+        &:hover {
+            color: $color-black;
+        }
+    }
+
+    &.dark {
+        background-color: $color-tan-medium;
+        color: $color-tan-light;
+        &:hover {
+            color: $color-black;
+        }
+    }
+}
+
+
+.MuiDialog-container {
+    .MuiDialogTitle-root {
+        color: $color-red-light;
+    }
+
+    .MuiDialog-paper {
+        background-color: $color-tan-light;
+        box-shadow: none;
+        border-radius: 0;
+        transition: none;
+    }
+
+    .MuiDialogActions-root {
+        padding: 24px;
+    }
+}
+
+.MuiInput-underline:before {
+    border-bottom: 2px solid #e2dfd2!important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+    color: $color-tan-medium!important;
+    font-weight: bold!important;
+}
+
+.MuiInput-underline:after { 
+    border-bottom: 2px solid $color-tan-medium!important;
 }
