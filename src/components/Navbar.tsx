@@ -15,6 +15,7 @@ const Navbar: FC = () => {
                     <div className="button link" onClick={() => setShowRegisterDialog(true)}>REGISTER</div>
                 </Box>
             </Box>
+            {/* <RegisterDialog   /> */}
             <RegisterDialog open={showRegisterDialog} onClose={() => setShowRegisterDialog(false)} />
         </div>
     )
