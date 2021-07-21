@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { cache } from '../cache'
 
+console.log('ENV', process.env)
 const client = new ApolloClient({
     uri: process.env.TD_API || 'http://localhost:4000/graphql',
     cache,
