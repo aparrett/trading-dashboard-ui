@@ -2,10 +2,11 @@ import { Box } from '@material-ui/core'
 import { FC, useEffect, useState } from 'react'
 import { useAuthDispatch, useAuthState } from '../context/AuthContext'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
+import LoginDialog from './LoginDialog'
 import RegisterDialog from './RegisterDialog'
 
 const Navbar: FC = () => {
-    // const [showLoginDialog, setShowLoginDialog] = useState(false)
+    const [showLoginDialog, setShowLoginDialog] = useState(false)
     const [showRegisterDialog, setShowRegisterDialog] = useState(false)
     const [logout] = useLogoutMutation()
     const auth = useAuthState()
@@ -48,7 +49,7 @@ const Navbar: FC = () => {
                         </>
                     ) : (
                         <>
-                            <div className="button link">LOGIN</div>
+                            <div className="button link"  onClick={() => setShowLoginDialog(true)}>LOGIN</div>
                             <div className="button link" onClick={() => setShowRegisterDialog(true)}>
                                 REGISTER
                             </div>
@@ -57,6 +58,7 @@ const Navbar: FC = () => {
                 </Box>
             </Box>
             <RegisterDialog open={showRegisterDialog} onClose={() => setShowRegisterDialog(false)} />
+            <LoginDialog open={showLoginDialog} onClose={() => setShowLoginDialog(false)} />
         </div>
     )
 }
