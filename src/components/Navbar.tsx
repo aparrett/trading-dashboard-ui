@@ -28,7 +28,7 @@ const Navbar: FC = () => {
                 <Box display="flex" justifyContent="flex-end">
                     {meData?.me ? (
                         <>
-                            <div>{meData.me.username}</div>
+                            <div className="username">{meData.me.username}</div>
                             <div className="button link" onClick={handleLogout}>
                                 LOGOUT
                             </div>

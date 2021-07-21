@@ -4,6 +4,8 @@ html {
     background: $color-tan-light;
 }
 
+/** NAVBAR **/
+
 .navbar {
     margin-top: 2px;
 
@@ -23,6 +25,15 @@ html {
         color: $color-red;
     }
 }
+
+.username {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: -1px;
+}
+
+/** BUTTONS **/
 
 button {
     border: none!important;
@@ -57,6 +68,7 @@ button {
     }
 }
 
+/** DIALOGS **/
 
 .MuiDialog-container {
     .MuiDialogTitle-root {
