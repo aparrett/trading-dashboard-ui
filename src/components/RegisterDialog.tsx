@@ -4,9 +4,10 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { FC } from 'react'
 import { useFormik } from 'formik'
-import { useRegisterMutation } from '../generated/graphql'
+import { useRegisterMutation, MeQuery, MeDocument } from '../generated/graphql'
 import { TextField } from '@material-ui/core'
 import { toErrorMap } from '../util/toErrorMap'
+import { useAuthDispatch } from '../context/AuthContext'
 
 interface RegisterDialogProps {
     open: boolean
@@ -15,31 +16,30 @@ interface RegisterDialogProps {
 
 const RegisterDialog: FC<RegisterDialogProps> = ({ open, onClose }) => {
     const [register] = useRegisterMutation()
+    const dispatch = useAuthDispatch()
     const formik = useFormik({
         initialValues: { email: '', username: '', password: '' },
         onSubmit: async (values, { setErrors }) => {
-            // const response = await register({
-            //     variables: { options: values },
-            //     update: (cache, { data }) => {
-            //       cache.writeQuery<MeQuery>({
-            //         query: MeDocument,
-            //         data: {
-            //           __typename: "Query",
-            //           me: data?.register.user,
-            //         },
-            //       });
-            //     },
-
-            //   });
             const response = await register({
-                variables: { options: values }
+                variables: { options: values },
+                update: (cache, { data }) => {
+                    cache.writeQuery<MeQuery>({
+                        query: MeDocument,
+                        data: {
+                            __typename: 'Query',
+                            me: data?.register.user
+                        }
+                    })
+                }
             })
+
             const errors = response?.data?.register?.errors
             const user = response?.data?.register?.user
             if (errors) {
                 setErrors(toErrorMap(errors))
             } else if (user) {
-                console.log({ user })
+                dispatch({ type: 'auth', payload: user })
+                onClose()
             }
         }
     })
