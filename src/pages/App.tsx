@@ -3,10 +3,10 @@ import Navbar from '../components/Navbar'
 import { FC } from 'react'
 import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { cache } from '../cache'
+import { API_URL } from '../config'
 
-console.log('ENV', process.env)
 const client = new ApolloClient({
-    uri: process.env.TD_API || 'http://localhost:4000/graphql',
+    uri: API_URL,
     cache,
     credentials: 'include'
 })
