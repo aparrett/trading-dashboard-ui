@@ -7,7 +7,6 @@ import { useFormik } from 'formik'
 import { MeQuery, MeDocument, useLoginMutation } from '../generated/graphql'
 import { TextField } from '@material-ui/core'
 import { toErrorMap } from '../util/toErrorMap'
-import { useAuthDispatch } from '../context/AuthContext'
 
 interface LoginDialogProps {
     open: boolean
@@ -16,7 +15,6 @@ interface LoginDialogProps {
 
 const LoginDialog: FC<LoginDialogProps> = ({ open, onClose }) => {
     const [login] = useLoginMutation()
-    const dispatch = useAuthDispatch()
     const formik = useFormik({
         initialValues: { username: '', password: '' },
         onSubmit: async (values, { setErrors }) => {
@@ -38,7 +36,6 @@ const LoginDialog: FC<LoginDialogProps> = ({ open, onClose }) => {
             if (errors) {
                 setErrors(toErrorMap(errors))
             } else if (user) {
-                dispatch({ type: 'auth', payload: user })
                 onClose()
             }
         }
