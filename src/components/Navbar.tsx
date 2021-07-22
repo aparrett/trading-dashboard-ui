@@ -4,6 +4,7 @@ import { useLogoutMutation, useMeQuery } from '../generated/graphql'
 import LoginDialog from './LoginDialog'
 import RegisterDialog from './RegisterDialog'
 import { cache } from '../cache'
+import { Link } from 'react-router-dom'
 
 const Navbar: FC = () => {
     const [showLoginDialog, setShowLoginDialog] = useState(false)
@@ -25,6 +26,14 @@ const Navbar: FC = () => {
         <div>
             <Box display="flex" justifyContent="space-between" className="navbar">
                 <div className="logo">TRADE</div>
+                <div>
+                    <button className="button light">
+                        <Link to="/">Overview</Link>
+                    </button>
+                    <button className="button light">
+                        <Link to="/history">History</Link>
+                    </button>
+                </div>
                 <Box display="flex" justifyContent="flex-end">
                     {meData?.me ? (
                         <>

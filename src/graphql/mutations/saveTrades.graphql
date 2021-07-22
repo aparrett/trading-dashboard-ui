@@ -1,0 +1,12 @@
+mutation SaveTrades ($trades: [TradeInput!]!) {
+    saveTrades(trades: $trades){
+        id,
+        symbol,
+        side,
+        quantity,
+        entry,
+        close,
+        openDate,
+        closeDate
+    }
+}

@@ -10,6 +10,8 @@ export type Scalars = {
     Boolean: boolean
     Int: number
     Float: number
+    /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+    DateTime: any
 }
 
 export type FieldError = {
@@ -25,6 +27,7 @@ export type Mutation = {
     register: UserResponse
     login: UserResponse
     logout: Scalars['Boolean']
+    saveTrades: Array<Trade>
 }
 
 export type MutationChangePasswordArgs = {
@@ -45,9 +48,36 @@ export type MutationLoginArgs = {
     usernameOrEmail: Scalars['String']
 }
 
+export type MutationSaveTradesArgs = {
+    trades: Array<TradeInput>
+}
+
 export type Query = {
     __typename?: 'Query'
     me?: Maybe<User>
+}
+
+export type Trade = {
+    __typename?: 'Trade'
+    id: Scalars['Float']
+    traderId: Scalars['Float']
+    symbol: Scalars['String']
+    side: Scalars['String']
+    quantity: Scalars['Float']
+    entry: Scalars['Float']
+    close: Scalars['Float']
+    openDate: Scalars['DateTime']
+    closeDate: Scalars['DateTime']
+}
+
+export type TradeInput = {
+    symbol: Scalars['String']
+    side: Scalars['String']
+    quantity: Scalars['Float']
+    entry: Scalars['Float']
+    close: Scalars['Float']
+    openDate: Scalars['DateTime']
+    closeDate: Scalars['DateTime']
 }
 
 export type User = {
@@ -96,6 +126,19 @@ export type RegisterMutation = { __typename?: 'Mutation' } & {
         errors?: Maybe<Array<{ __typename?: 'FieldError' } & Pick<FieldError, 'field' | 'message'>>>
         user?: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'username'>>
     }
+}
+
+export type SaveTradesMutationVariables = Exact<{
+    trades: Array<TradeInput>
+}>
+
+export type SaveTradesMutation = { __typename?: 'Mutation' } & {
+    saveTrades: Array<
+        { __typename?: 'Trade' } & Pick<
+            Trade,
+            'id' | 'symbol' | 'side' | 'quantity' | 'entry' | 'close' | 'openDate' | 'closeDate'
+        >
+    >
 }
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>
@@ -216,6 +259,53 @@ export function useRegisterMutation(
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>
 export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>
 export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>
+export const SaveTradesDocument = gql`
+    mutation SaveTrades($trades: [TradeInput!]!) {
+        saveTrades(trades: $trades) {
+            id
+            symbol
+            side
+            quantity
+            entry
+            close
+            openDate
+            closeDate
+        }
+    }
+`
+export type SaveTradesMutationFn = ApolloReactCommon.MutationFunction<SaveTradesMutation, SaveTradesMutationVariables>
+
+/**
+ * __useSaveTradesMutation__
+ *
+ * To run a mutation, you first call `useSaveTradesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSaveTradesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [saveTradesMutation, { data, loading, error }] = useSaveTradesMutation({
+ *   variables: {
+ *      trades: // value for 'trades'
+ *   },
+ * });
+ */
+export function useSaveTradesMutation(
+    baseOptions?: ApolloReactHooks.MutationHookOptions<SaveTradesMutation, SaveTradesMutationVariables>
+) {
+    return ApolloReactHooks.useMutation<SaveTradesMutation, SaveTradesMutationVariables>(
+        SaveTradesDocument,
+        baseOptions
+    )
+}
+export type SaveTradesMutationHookResult = ReturnType<typeof useSaveTradesMutation>
+export type SaveTradesMutationResult = ApolloReactCommon.MutationResult<SaveTradesMutation>
+export type SaveTradesMutationOptions = ApolloReactCommon.BaseMutationOptions<
+    SaveTradesMutation,
+    SaveTradesMutationVariables
+>
 export const MeDocument = gql`
     query Me {
         me {
