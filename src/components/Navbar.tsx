@@ -25,12 +25,14 @@ const Navbar: FC = () => {
     return (
         <div>
             <Box display="flex" justifyContent="space-between" className="navbar">
-                <div className="logo">TRADE</div>
-                <div>
-                    <button className="button light">
+                <div style={{ display: 'flex' }}>
+                    <div className="logo">
+                        <Link to="/">TRADE</Link>
+                    </div>
+                    <button className="button outlined-light">
                         <Link to="/">Overview</Link>
                     </button>
-                    <button className="button light">
+                    <button className="button outlined-light">
                         <Link to="/history">History</Link>
                     </button>
                 </div>

@@ -6,6 +6,7 @@ import { cache } from '../cache'
 import { API_URL } from '../config'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import History from '../pages/History'
+import { Container } from '@material-ui/core'
 
 const client = new ApolloClient({
     uri: API_URL,
@@ -16,19 +17,21 @@ const client = new ApolloClient({
 const App: FC = () => {
     return (
         <ApolloProvider client={client}>
-            <div className="App">
-                <Router>
-                    <Navbar />
-                    <Switch>
-                        <Route exact path="/">
-                            <div>Overview!!</div>
-                        </Route>
-                        <Route exact path="/history">
-                            <History />
-                        </Route>
-                    </Switch>
-                </Router>
-            </div>
+            <Container>
+                <div className="App">
+                    <Router>
+                        <Navbar />
+                        <Switch>
+                            <Route exact path="/">
+                                <div>Overview</div>
+                            </Route>
+                            <Route exact path="/history">
+                                <History />
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
+            </Container>
         </ApolloProvider>
     )
 }
