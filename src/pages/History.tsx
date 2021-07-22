@@ -9,8 +9,12 @@ const History: FC = () => {
     return meData?.me ? (
         <div>
             <button className="button light link" onClick={() => setShowImportDialog(true)}>
-                Import JSON
+                Import
             </button>
+            <pre>{`{ "test": "string" }`}</pre>
+            <pre>{`{`}</pre>
+            <pre>"test":"string"</pre>
+            <pre>{`}`}</pre>
 
             <ImportTradesDialog open={showImportDialog} onClose={() => setShowImportDialog(false)} />
         </div>

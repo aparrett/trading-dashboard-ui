@@ -79,7 +79,6 @@ button {
         border-color: #f1f0eb;
         border: 1px solid #e2dfd2!important;
         color: $color-tan-dark;
-        // color: $color-black;
         &:hover {
             color: $color-red-light;
             border-color: $color-red-light!important;
@@ -117,4 +116,20 @@ button {
 
 .MuiInput-underline:after { 
     border-bottom: 2px solid $color-tan-medium!important;
+}
+
+.trade-import-header {
+    height: 48px;
+    & > div {
+        font-weight: bold;
+        height: 48px;
+        text-align: center;
+        padding: 15px 0;      
+        background-color: $color-tan-light-2;
+        cursor: pointer;
+        color: $color-tan-dark;
+    }
+    & > div.active {
+        background-color: $color-tan-light;
+    }
 }

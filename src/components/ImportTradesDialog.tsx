@@ -1,7 +1,7 @@
-import { Dialog, DialogContent, DialogTitle, TextField, DialogActions } from '@material-ui/core'
-import { useFormik } from 'formik'
-import { FC } from 'react'
-import { useSaveTradesMutation } from '../generated/graphql'
+import { Dialog, Grid } from '@material-ui/core'
+import { FC, useState } from 'react'
+import ImportTradesJSON from './ImportTradesJSON'
+import ImportTradesCSV from './ImportTradesCSV'
 
 interface ImportTradesDialogProps {
     open: boolean
@@ -9,52 +9,18 @@ interface ImportTradesDialogProps {
 }
 
 const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose }) => {
-    const [saveTrades] = useSaveTradesMutation()
-    const formik = useFormik({
-        initialValues: { trades: '' },
-        onSubmit: async (values, { setErrors, resetForm }) => {
-            const response = await saveTrades({
-                variables: { trades: JSON.parse(values.trades) }
-            })
-
-            const trades = response?.data?.saveTrades
-            if (trades) {
-                resetForm()
-                onClose()
-            } else {
-                setErrors({ trades: 'Something went wrong' })
-            }
-        }
-    })
+    const [isJSONActive, setIsJSONActive] = useState(true)
     return (
-        <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
-            <form onSubmit={formik.handleSubmit}>
-                <DialogTitle>IMPORT TRADES</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        multiline
-                        rows={10}
-                        rowsMax={10}
-                        autoFocus
-                        margin="dense"
-                        name="trades"
-                        label="TRADES JSON"
-                        fullWidth
-                        value={formik.values.trades}
-                        onChange={formik.handleChange}
-                        error={formik.touched.trades && Boolean(formik.errors.trades)}
-                        helperText={formik.touched.trades && formik.errors.trades}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <button className="button link light" type="reset" onClick={onClose}>
-                        CANCEL
-                    </button>
-                    <button className="button link dark" type="submit">
-                        IMPORT
-                    </button>
-                </DialogActions>
-            </form>
+        <Dialog open={open} aria-labelledby="form-dialog-title">
+            <Grid container className="trade-import-header">
+                <Grid item xs={6} className={isJSONActive ? 'active' : ''} onClick={() => setIsJSONActive(true)}>
+                    JSON
+                </Grid>
+                <Grid item xs={6} className={!isJSONActive ? 'active' : ''} onClick={() => setIsJSONActive(false)}>
+                    CSV
+                </Grid>
+            </Grid>
+            {isJSONActive ? <ImportTradesJSON onClose={onClose} /> : <ImportTradesCSV onClose={onClose} />}
         </Dialog>
     )
 }
