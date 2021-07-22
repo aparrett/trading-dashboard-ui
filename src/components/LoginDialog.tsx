@@ -17,7 +17,7 @@ const LoginDialog: FC<LoginDialogProps> = ({ open, onClose }) => {
     const [login] = useLoginMutation()
     const formik = useFormik({
         initialValues: { username: '', password: '' },
-        onSubmit: async (values, { setErrors }) => {
+        onSubmit: async (values, { setErrors, resetForm }) => {
             const response = await login({
                 variables: { ...values },
                 update: (cache, { data }) => {
@@ -36,6 +36,7 @@ const LoginDialog: FC<LoginDialogProps> = ({ open, onClose }) => {
             if (errors) {
                 setErrors(toErrorMap(errors))
             } else if (user) {
+                resetForm()
                 onClose()
             }
         }
@@ -69,7 +70,7 @@ const LoginDialog: FC<LoginDialogProps> = ({ open, onClose }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <button className="button link light" onClick={onClose}>
+                    <button className="button link light" type="reset" onClick={onClose}>
                         CANCEL
                     </button>
                     <button className="button link dark" type="submit">

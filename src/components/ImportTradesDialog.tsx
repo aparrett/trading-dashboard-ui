@@ -12,14 +12,14 @@ const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose }) => {
     const [saveTrades] = useSaveTradesMutation()
     const formik = useFormik({
         initialValues: { trades: '' },
-        onSubmit: async (values, { setErrors }) => {
+        onSubmit: async (values, { setErrors, resetForm }) => {
             const response = await saveTrades({
                 variables: { trades: JSON.parse(values.trades) }
             })
 
             const trades = response?.data?.saveTrades
-            console.log(trades)
             if (trades) {
+                resetForm()
                 onClose()
             } else {
                 setErrors({ trades: 'Something went wrong' })
@@ -47,7 +47,7 @@ const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <button className="button link light" onClick={onClose}>
+                    <button className="button link light" type="reset" onClick={onClose}>
                         CANCEL
                     </button>
                     <button className="button link dark" type="submit">

@@ -17,7 +17,7 @@ const RegisterDialog: FC<RegisterDialogProps> = ({ open, onClose }) => {
     const [register] = useRegisterMutation()
     const formik = useFormik({
         initialValues: { email: '', username: '', password: '' },
-        onSubmit: async (values, { setErrors }) => {
+        onSubmit: async (values, { setErrors, resetForm }) => {
             const response = await register({
                 variables: { options: values },
                 update: (cache, { data }) => {
@@ -36,6 +36,7 @@ const RegisterDialog: FC<RegisterDialogProps> = ({ open, onClose }) => {
             if (errors) {
                 setErrors(toErrorMap(errors))
             } else if (user) {
+                resetForm()
                 onClose()
             }
         }
@@ -80,7 +81,7 @@ const RegisterDialog: FC<RegisterDialogProps> = ({ open, onClose }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <button className="button link light" onClick={onClose}>
+                    <button className="button link light" type="reset" onClick={onClose}>
                         CANCEL
                     </button>
                     <button className="button link dark" type="submit">
