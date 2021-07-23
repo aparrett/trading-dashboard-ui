@@ -55,6 +55,7 @@ export type MutationSaveTradesArgs = {
 export type Query = {
     __typename?: 'Query'
     me?: Maybe<User>
+    trades: Array<Trade>
 }
 
 export type Trade = {
@@ -144,6 +145,17 @@ export type SaveTradesMutation = { __typename?: 'Mutation' } & {
 export type MeQueryVariables = Exact<{ [key: string]: never }>
 
 export type MeQuery = { __typename?: 'Query' } & { me?: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'username'>> }
+
+export type TradesQueryVariables = Exact<{ [key: string]: never }>
+
+export type TradesQuery = { __typename?: 'Query' } & {
+    trades: Array<
+        { __typename?: 'Trade' } & Pick<
+            Trade,
+            'id' | 'symbol' | 'side' | 'quantity' | 'entry' | 'close' | 'openDate' | 'closeDate'
+        >
+    >
+}
 
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
@@ -339,3 +351,44 @@ export function useMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptio
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>
 export type MeQueryResult = ApolloReactCommon.QueryResult<MeQuery, MeQueryVariables>
+export const TradesDocument = gql`
+    query Trades {
+        trades {
+            id
+            symbol
+            side
+            quantity
+            entry
+            close
+            openDate
+            closeDate
+        }
+    }
+`
+
+/**
+ * __useTradesQuery__
+ *
+ * To run a query within a React component, call `useTradesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTradesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTradesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTradesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TradesQuery, TradesQueryVariables>) {
+    return ApolloReactHooks.useQuery<TradesQuery, TradesQueryVariables>(TradesDocument, baseOptions)
+}
+export function useTradesLazyQuery(
+    baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TradesQuery, TradesQueryVariables>
+) {
+    return ApolloReactHooks.useLazyQuery<TradesQuery, TradesQueryVariables>(TradesDocument, baseOptions)
+}
+export type TradesQueryHookResult = ReturnType<typeof useTradesQuery>
+export type TradesLazyQueryHookResult = ReturnType<typeof useTradesLazyQuery>
+export type TradesQueryResult = ApolloReactCommon.QueryResult<TradesQuery, TradesQueryVariables>

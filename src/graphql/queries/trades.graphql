@@ -1,0 +1,12 @@
+query Trades {
+    trades {
+        id,
+        symbol,
+        side,
+        quantity,
+        entry,
+        close,
+        openDate,
+        closeDate
+    }
+}

@@ -2,6 +2,7 @@
 
 html {
     background: $color-tan-light;
+    color: $color-tan-darker;
 }
 
 a {
@@ -51,18 +52,18 @@ button {
     font-size: 12px;
     color: $color-tan-light;
     font-weight: bold;
-    background-color: $color-black;
+    background-color: $color-tan-darker;
 
     &:hover {
         cursor: pointer;
-        color: $color-red;
+        color: $color-tan-light-2;
     }
 
     &.light {
         background-color: $color-tan-light-2;
         color: $color-tan-dark;
         &:hover {
-            color: $color-black;
+            color: $color-tan-darker;
         }
     }
 
@@ -70,7 +71,7 @@ button {
         background-color: $color-tan-medium;
         color: $color-tan-light;
         &:hover {
-            color: $color-black;
+            color: $color-tan-darker;
         }
     }
 
@@ -166,10 +167,22 @@ button {
     margin-bottom: 10px;
 }
 
-.MuiCollapse-wrapper .SnackbarItem-variantSuccess-21 {
-    background-color: $color-tan-medium;
-    box-shadow: none;
-    font-weight: bold;
-    border-radius: 0;
-    min-width: 0;
+
+.MuiCollapse-wrapper {
+    div [class*="SnackbarItem-contentRoot"]{
+        box-shadow: none;
+        font-weight: bold;
+        border-radius: 0;
+        min-width: 0;
+    }
+
+    div [class*="SnackbarItem-variantSuccess"]{
+        background-color: $color-tan-medium;
+    }
+}
+
+.trades-table-wrapper {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
 }
