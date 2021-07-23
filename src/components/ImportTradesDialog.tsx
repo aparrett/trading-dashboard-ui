@@ -11,7 +11,7 @@ interface ImportTradesDialogProps {
 const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose }) => {
     const [isJSONActive, setIsJSONActive] = useState(true)
     return (
-        <Dialog open={open} aria-labelledby="form-dialog-title">
+        <Dialog open={open} aria-labelledby="form-dialog-title" className="import-trades-dialog">
             <Grid container className="trade-import-header">
                 <Grid item xs={6} className={isJSONActive ? 'active' : ''} onClick={() => setIsJSONActive(true)}>
                     JSON

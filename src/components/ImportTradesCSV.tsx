@@ -28,7 +28,7 @@ const ImportTradesCSV: FC<ImportTradesCSVProps> = ({ onClose }) => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <DialogContent>
-                CSV TODO
+                CSV (this feature has not yet been implemented)
                 <TextField
                     multiline
                     rows={10}

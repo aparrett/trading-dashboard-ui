@@ -133,3 +133,29 @@ button {
         background-color: $color-tan-light;
     }
 }
+
+.MuiDialog-paperWidthSm {
+    max-width: 810px!important;
+}
+
+.import-trades-dialog {
+    .MuiDialogContent-root{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.import-trades-json-container {
+    width: 810px!important;
+
+    .MuiGrid-item {
+        padding: 0 24px;
+    }
+
+    textarea {
+        background-color: #e2dfd2;
+        padding: 10px;
+        font-size: 13px;
+        font-family: monospace;
+    }
+}
