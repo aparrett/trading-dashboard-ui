@@ -159,3 +159,17 @@ button {
         font-family: monospace;
     }
 }
+
+/* Snackbar */
+
+.MuiCollapse-root.MuiCollapse-entered {
+    margin-bottom: 10px;
+}
+
+.MuiCollapse-wrapper .SnackbarItem-variantSuccess-21 {
+    background-color: $color-tan-medium;
+    box-shadow: none;
+    font-weight: bold;
+    border-radius: 0;
+    min-width: 0;
+}
