@@ -29,12 +29,12 @@ const Navbar: FC = () => {
                     <div className="logo">
                         <Link to="/">TRADE</Link>
                     </div>
-                    <button className="button outlined-light">
-                        <Link to="/">Overview</Link>
-                    </button>
-                    <button className="button outlined-light">
-                        <Link to="/history">History</Link>
-                    </button>
+                    <Link to="/">
+                        <button className="button outlined-light">Overview</button>
+                    </Link>
+                    <Link to="/history">
+                        <button className="button outlined-light">History</button>
+                    </Link>
                 </div>
                 <Box display="flex" justifyContent="flex-end">
                     {meData?.me ? (
