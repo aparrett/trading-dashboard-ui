@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useSaveTradesMutation, useTradesQuery } from '../generated/graphql'
+import { Trade, useSaveTradesMutation, useTradesQuery } from '../generated/graphql'
 import { useFormik } from 'formik'
 import { DialogActions, DialogContent, Grid, TextField } from '@material-ui/core'
 import { useSnackbar } from 'notistack'
@@ -18,7 +18,15 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose, selectedStartDat
         initialValues: { trades: '' },
         onSubmit: async (values, { setErrors, resetForm }) => {
             const response = await saveTrades({
-                variables: { trades: JSON.parse(values.trades) }
+                variables: {
+                    trades: JSON.parse(values.trades).map((trade: Trade) => {
+                        return {
+                            ...trade,
+                            openDate: moment(trade.openDate).format('YYYY-MM-DDTHH:mm:ss.000') + 'Z',
+                            closeDate: moment(trade.closeDate).format('YYYY-MM-DDTHH:mm:ss.000') + 'Z'
+                        }
+                    })
+                }
             })
 
             const trades = response?.data?.saveTrades
