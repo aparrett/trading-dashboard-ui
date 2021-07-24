@@ -3,12 +3,14 @@ import { useSaveTradesMutation, useTradesQuery } from '../generated/graphql'
 import { useFormik } from 'formik'
 import { DialogActions, DialogContent, Grid, TextField } from '@material-ui/core'
 import { useSnackbar } from 'notistack'
+import moment from 'moment'
 
 interface ImportTradesJSONProps {
     onClose: () => void
+    selectedStartDate: string
 }
 
-const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose }) => {
+const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose, selectedStartDate }) => {
     const { enqueueSnackbar } = useSnackbar()
     const [saveTrades] = useSaveTradesMutation()
     const { refetch } = useTradesQuery()
@@ -31,6 +33,9 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose }) => {
         }
     })
 
+    // Set example open and close to a date included in the current filter so the trade will show up if the user imports the example.
+    const exampleOpen = moment(selectedStartDate).set('hour', 9).set('minute', 46).format('MM-DD-YY HH:mm:ss')
+    const exampleClose = moment(selectedStartDate).set('hour', 9).set('minute', 51).format('MM-DD-YY HH:mm:ss')
     const example = JSON.stringify(
         [
             {
@@ -39,13 +44,14 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose }) => {
                 quantity: 250,
                 entry: 3.37,
                 close: 3.45,
-                openDate: '07-22-21 08:16:55',
-                closeDate: '07-22-21 08:21:16'
+                openDate: exampleOpen,
+                closeDate: exampleClose
             }
         ],
         undefined,
         4
     )
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <DialogContent>

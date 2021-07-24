@@ -25,14 +25,14 @@ const App: FC = () => {
                         vertical: 'bottom',
                         horizontal: 'left'
                     }}
-                    // TransitionComponent={Slide}
                 >
                     <div className="App">
                         <Router>
                             <Navbar />
                             <Switch>
                                 <Route exact path="/">
-                                    <div>Overview</div>
+                                    <h1>Overview</h1>
+                                    <div>Under Construction</div>
                                 </Route>
                                 <Route exact path="/history">
                                     <History />

@@ -6,9 +6,10 @@ import ImportTradesCSV from './ImportTradesCSV'
 interface ImportTradesDialogProps {
     open: boolean
     onClose: () => void
+    selectedStartDate: string
 }
 
-const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose }) => {
+const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose, selectedStartDate }) => {
     const [isJSONActive, setIsJSONActive] = useState(true)
     return (
         <Dialog open={open} aria-labelledby="form-dialog-title" className="import-trades-dialog">
@@ -20,7 +21,11 @@ const ImportTradesDialog: FC<ImportTradesDialogProps> = ({ open, onClose }) => {
                     CSV
                 </Grid>
             </Grid>
-            {isJSONActive ? <ImportTradesJSON onClose={onClose} /> : <ImportTradesCSV onClose={onClose} />}
+            {isJSONActive ? (
+                <ImportTradesJSON selectedStartDate={selectedStartDate} onClose={onClose} />
+            ) : (
+                <ImportTradesCSV onClose={onClose} />
+            )}
         </Dialog>
     )
 }
