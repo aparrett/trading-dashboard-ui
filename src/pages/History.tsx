@@ -37,8 +37,10 @@ const History: FC = () => {
     const profit = trades.reduce((acc, trade) => acc + trade.profitLoss, 0)
     const winners = trades.filter((trade) => trade.profitLoss >= 0)
     const losers = trades.filter((trade) => trade.profitLoss < 0)
-    const averageWinner = winners.reduce((acc, trade) => acc + trade.profitLoss, 0) / winners.length
-    const averageLoser = losers.reduce((acc, trade) => acc + trade.profitLoss, 0) / losers.length
+    const averageWinner =
+        winners.length === 0 ? 0 : winners.reduce((acc, trade) => acc + trade.profitLoss, 0) / winners.length
+    const averageLoser =
+        losers.length === 0 ? 0 : losers.reduce((acc, trade) => acc + trade.profitLoss, 0) / losers.length
 
     const columns = [
         { field: 'symbol', headerName: 'Symbol' },

@@ -194,19 +194,20 @@ button {
     margin-bottom: 10px;
 }
 
-
 .MuiCollapse-wrapper {
-    div [class*="SnackbarItem-contentRoot"]{
+    .snackbar {
         box-shadow: none;
         font-weight: bold;
         border-radius: 0;
         min-width: 0;
     }
 
-    div [class*="SnackbarItem-variantSuccess"]{
-        background-color: $color-tan-medium;
+    .snackbar-success {
+        background-color: #adaaa3;
     }
 }
+
+/* History table */
 
 .trades-table-wrapper {
     height: 400px;

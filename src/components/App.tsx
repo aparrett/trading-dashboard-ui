@@ -20,10 +20,14 @@ const App: FC = () => {
         <ApolloProvider client={client}>
             <Container>
                 <SnackbarProvider
+                    className="snackbar"
                     maxSnack={3}
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'left'
+                    }}
+                    classes={{
+                        variantSuccess: 'snackbar-success'
                     }}
                 >
                     <div className="App">
