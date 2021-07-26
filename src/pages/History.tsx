@@ -19,6 +19,7 @@ const History: FC = () => {
 
     const { data: meData } = useMeQuery()
     const { data: tradesData } = useTradesQuery()
+    console.log(tradesData?.trades)
     const trades = (tradesData?.trades || [])
         .filter((trade) => {
             return (
