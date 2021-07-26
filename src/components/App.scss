@@ -10,6 +10,33 @@ a {
     text-decoration: none!important;
 }
 
+input[type="date"] {
+    cursor: pointer;
+}
+
+body {
+    // Remove blue outline when selecting column headers and table cells
+    .MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within, .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+        outline: none;
+    }
+
+    .MuiCheckbox-colorPrimary.Mui-checked {
+        color: $color-tan-medium;
+    }
+
+    .MuiDataGrid-root .MuiDataGrid-row.Mui-selected, .MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+}
+
+.red {
+    color: #e85a4f;
+}
+
+.green {
+    color: #6cc75c;
+}
+
 /** NAVBAR **/
 
 .navbar {

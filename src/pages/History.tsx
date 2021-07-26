@@ -4,24 +4,41 @@ import { useMeQuery, useTradesQuery } from '../generated/graphql'
 import { DataGrid, GridValueGetterParams } from '@material-ui/data-grid'
 import { ISOtoStandard } from '../util/ISOtoStandard'
 import moment from 'moment'
-import { TextField } from '@material-ui/core'
+import { Box, Grid, TextField } from '@material-ui/core'
+import { getProfitLoss } from '../util/getProfitLoss'
+import { getProfitClass } from '../util/getProfitClass'
+import { roundPenny } from '../util/roundPenny'
 
 const History: FC = () => {
     const [showImportDialog, setShowImportDialog] = useState(false)
 
-    // Must use this format for textarea input field to work.
+    // Must use this format for date input field to work.
     const today = moment().format('yyyy-MM-DD').toString()
     const [startDate, setStartDate] = useState(today)
     const [endDate, setEndDate] = useState(today)
 
     const { data: meData } = useMeQuery()
     const { data: tradesData } = useTradesQuery()
-    const trades = (tradesData?.trades || []).filter((trade) => {
-        return (
-            !moment(trade.openDate).isBefore(moment(startDate).startOf('day')) &&
-            !moment(trade.closeDate).isAfter(moment(endDate).endOf('day'))
-        )
-    })
+    const trades = (tradesData?.trades || [])
+        .filter((trade) => {
+            return (
+                !moment(trade.openDate).isBefore(moment(startDate).startOf('day')) &&
+                !moment(trade.closeDate).isAfter(moment(endDate).endOf('day'))
+            )
+        })
+        .map((trade) => {
+            const { entry, close, quantity, side } = trade
+            return {
+                ...trade,
+                profitLoss: getProfitLoss(entry, close, quantity, side)
+            }
+        })
+
+    const profit = trades.reduce((acc, trade) => acc + trade.profitLoss, 0)
+    const winners = trades.filter((trade) => trade.profitLoss >= 0)
+    const losers = trades.filter((trade) => trade.profitLoss < 0)
+    const averageWinner = winners.reduce((acc, trade) => acc + trade.profitLoss, 0) / winners.length
+    const averageLoser = losers.reduce((acc, trade) => acc + trade.profitLoss, 0) / losers.length
 
     const columns = [
         { field: 'symbol', headerName: 'Symbol' },
@@ -29,6 +46,7 @@ const History: FC = () => {
         { field: 'quantity', headerName: 'Qty' },
         { field: 'entry', headerName: 'Entry' },
         { field: 'close', headerName: 'Close' },
+        { field: 'profitLoss', headerName: 'Profit' },
         {
             field: 'openDate',
             headerName: 'Open Date',
@@ -64,37 +82,81 @@ const History: FC = () => {
             <h1>History</h1>
             {meData?.me ? (
                 <div>
-                    <TextField
-                        label="Start Date"
-                        defaultValue={startDate}
-                        value={startDate}
-                        onChange={(e) => handleStartDateChange(e.target.value)}
-                        type="date"
-                        InputLabelProps={{ shrink: true }}
-                    />
-                    <TextField
-                        label="End Date"
-                        defaultValue={endDate}
-                        value={endDate}
-                        onChange={(e) => handleEndDateChange(e.target.value)}
-                        type="date"
-                        InputLabelProps={{ shrink: true }}
-                        style={{ marginLeft: '20px' }}
-                    />
-                    <button
-                        className="button light link"
-                        style={{ marginLeft: '40px', marginTop: '2px' }}
-                        onClick={() => setShowImportDialog(true)}
-                    >
-                        Import
-                    </button>
+                    <Grid container>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Start Date"
+                                defaultValue={startDate}
+                                value={startDate}
+                                onChange={(e) => handleStartDateChange(e.target.value)}
+                                type="date"
+                                InputLabelProps={{ shrink: true }}
+                            />
+                            <TextField
+                                label="End Date"
+                                defaultValue={endDate}
+                                value={endDate}
+                                onChange={(e) => handleEndDateChange(e.target.value)}
+                                type="date"
+                                InputLabelProps={{ shrink: true }}
+                                style={{ marginLeft: '20px' }}
+                            />
+                            <button
+                                className="button light link"
+                                style={{ marginLeft: '40px', marginTop: '2px' }}
+                                onClick={() => setShowImportDialog(true)}
+                            >
+                                Import
+                            </button>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Grid container>
+                                <Grid item xs={4}>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Trades:</div>
+                                        <div>{trades.length}</div>
+                                    </Box>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Winning Trades:</div>
+                                        <div>{winners.length}</div>
+                                    </Box>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Losing Trades:</div>
+                                        <div>{losers.length}</div>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={2} />
+                                <Grid item xs={4}>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Profit:</div>
+                                        <div className={getProfitClass(profit)}>{roundPenny(profit)}</div>
+                                    </Box>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Average Winner:</div>
+                                        <div>{roundPenny(averageWinner)}</div>
+                                    </Box>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Average Loser:</div>
+                                        <div>{roundPenny(averageLoser)}</div>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={2} />
+                            </Grid>
+                        </Grid>
+                    </Grid>
                     <div className="trades-table-wrapper">
                         <DataGrid
-                            disableColumnMenu
                             columns={columns}
                             rows={trades}
                             checkboxSelection
                             density="compact"
+                            disableColumnMenu
+                            getCellClassName={(params) => {
+                                if (params.field !== 'profitLoss') {
+                                    return ''
+                                }
+                                return getProfitClass(Number(params.value))
+                            }}
                         />
                     </div>
                     <ImportTradesDialog
