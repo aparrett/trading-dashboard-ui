@@ -19,7 +19,6 @@ const History: FC = () => {
 
     const { data: meData } = useMeQuery()
     const { data: tradesData } = useTradesQuery()
-    console.log(tradesData?.trades)
     const trades = (tradesData?.trades || [])
         .filter((trade) => {
             return (
@@ -136,11 +135,11 @@ const History: FC = () => {
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Average Winner:</div>
-                                        <div>{roundPenny(averageWinner)}</div>
+                                        <div className={getProfitClass(averageWinner)}>{roundPenny(averageWinner)}</div>
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Average Loser:</div>
-                                        <div>{roundPenny(averageLoser)}</div>
+                                        <div className={getProfitClass(averageLoser)}>{roundPenny(averageLoser)}</div>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={2} />
@@ -169,7 +168,7 @@ const History: FC = () => {
                     />
                 </div>
             ) : (
-                <div>Login to start importing and analyzing your trades.</div>
+                <div>Login to import and analyze your trades.</div>
             )}
         </div>
     )
