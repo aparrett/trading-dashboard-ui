@@ -64,19 +64,21 @@ const History: FC = () => {
     ]
 
     const handleStartDateChange = (date: string) => {
+        // If the start is after the end date, change both to the selected start date.
         if (moment(date).isAfter(moment(endDate).endOf('day'))) {
-            setStartDate(endDate)
-        } else {
-            setStartDate(date)
+            setEndDate(date)
         }
+
+        setStartDate(date)
     }
 
     const handleEndDateChange = (date: string) => {
+        // If the end is before the start date, change both to the selected end date.
         if (moment(date).isBefore(moment(startDate).startOf('day'))) {
-            setEndDate(startDate)
-        } else {
-            setEndDate(date)
+            setStartDate(date)
         }
+
+        setEndDate(date)
     }
 
     return (
