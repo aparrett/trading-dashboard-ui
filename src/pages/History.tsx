@@ -35,12 +35,15 @@ const History: FC = () => {
         })
 
     const profit = trades.reduce((acc, trade) => acc + trade.profitLoss, 0)
-    const winners = trades.filter((trade) => trade.profitLoss >= 0)
-    const losers = trades.filter((trade) => trade.profitLoss < 0)
+    const tradesWithoutNeutrals = trades.filter((trade) => trade.profitLoss > 5 || trade.profitLoss < -5)
+    const winners = tradesWithoutNeutrals.filter((trade) => trade.profitLoss >= 0)
+    const losers = tradesWithoutNeutrals.filter((trade) => trade.profitLoss < 0)
     const averageWinner =
         winners.length === 0 ? 0 : winners.reduce((acc, trade) => acc + trade.profitLoss, 0) / winners.length
     const averageLoser =
         losers.length === 0 ? 0 : losers.reduce((acc, trade) => acc + trade.profitLoss, 0) / losers.length
+
+    const winPercentage = Math.round((winners.length / tradesWithoutNeutrals.length) * 100)
 
     const columns = [
         { field: 'symbol', headerName: 'Symbol' },
@@ -128,6 +131,10 @@ const History: FC = () => {
                                         <div>Losing Trades:</div>
                                         <div>{losers.length}</div>
                                     </Box>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Neutral Trades:</div>
+                                        <div>{trades.length - tradesWithoutNeutrals.length}</div>
+                                    </Box>
                                 </Grid>
                                 <Grid item xs={2} />
                                 <Grid item xs={4}>
@@ -142,6 +149,10 @@ const History: FC = () => {
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Average Loser:</div>
                                         <div className={getProfitClass(averageLoser)}>{roundPenny(averageLoser)}</div>
+                                    </Box>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <div>Win Percentage:</div>
+                                        <div>{winPercentage}%</div>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={2} />
