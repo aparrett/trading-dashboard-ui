@@ -43,7 +43,10 @@ const History: FC = () => {
     const averageLoser =
         losers.length === 0 ? 0 : losers.reduce((acc, trade) => acc + trade.profitLoss, 0) / losers.length
 
-    const winPercentage = Math.round((winners.length / tradesWithoutNeutrals.length) * 100)
+    const winPercentage =
+        winners.length > 0 && tradesWithoutNeutrals.length > 0
+            ? Math.round((winners.length / tradesWithoutNeutrals.length) * 100)
+            : 0
 
     const columns = [
         { field: 'symbol', headerName: 'Symbol' },
