@@ -1,8 +1,8 @@
-import { roundPenny } from './roundPenny'
+import { roundThree } from './roundPenny'
 
 export const getProfitLoss = (entry: number, close: number, quantity: number, side: string) => {
     if (side === 'Long') {
-        return roundPenny(quantity * (close - entry))
+        return roundThree(quantity * (close - entry))
     }
-    return roundPenny(quantity * (entry - close))
+    return roundThree(quantity * (entry - close))
 }

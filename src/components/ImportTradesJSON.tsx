@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack'
 import moment from 'moment'
 import { formatImportDate } from '../util/formatImportDate'
 import { translateSide } from '../util/csvRowToTrade'
+import { roundThree } from '../util/roundPenny'
 
 interface ImportTradesJSONProps {
     onClose: () => void
@@ -24,6 +25,8 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose, selectedStartDat
                     trades: JSON.parse(values.trades).map((trade: Trade) => {
                         return {
                             ...trade,
+                            entry: roundThree(trade.entry),
+                            close: trade.close ? roundThree(trade.close) : undefined,
                             side: translateSide(trade.side),
                             openDate: formatImportDate(trade.openDate),
                             closeDate: formatImportDate(trade.closeDate)

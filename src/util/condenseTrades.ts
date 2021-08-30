@@ -1,5 +1,19 @@
 import { Trade } from '../generated/graphql'
 import moment from 'moment'
+import { roundThree } from './roundPenny'
+
+const getAveragePrice = (trades: Trade[], quantity: number) => {
+    return (
+        trades.reduce((acc, trade) => {
+            const totalCost = trade.quantity * trade.entry
+            return acc + totalCost
+        }, 0) / quantity
+    )
+}
+
+const getTotalQuantity = (trades: Trade[]) => {
+    return trades.reduce((acc, curr) => acc + curr.quantity, 0)
+}
 
 export const condenseTrades = (trades: Trade[]) => {
     const tradeMap: { [x: string]: { entries: Trade[]; closes?: Trade[] } } = {}
@@ -32,30 +46,18 @@ export const condenseTrades = (trades: Trade[]) => {
             t.closes = [trade]
         }
 
-        const entriesQuantity = t.entries.reduce((acc, curr) => acc + curr.quantity, 0)
-        const exitsQuantity = t.closes.reduce((acc, curr) => acc + curr.quantity, 0)
+        const entriesQuantity = getTotalQuantity(t.entries)
+        const exitsQuantity = getTotalQuantity(t.closes)
 
         // Once our total exit quantity matches our entries' quantities, we can condense them into one trade.
         if (entriesQuantity === exitsQuantity) {
-            const averageEntry =
-                t.entries.reduce((acc, trade) => {
-                    const totalCost = trade.quantity * trade.entry
-                    return acc + totalCost
-                }, 0) / entriesQuantity
-            const averageClose =
-                t.closes.reduce((acc, trade) => {
-                    // It's a little weird but trades that haven't been condensed yet will only have an entry
-                    const totalCost = trade.quantity * trade.entry
-                    return acc + totalCost
-                }, 0) / exitsQuantity
-
             // Reset the symbol in the map to prepare for another trade.
             delete tradeMap[symbol]
 
             return condensedTrades.push({
                 symbol,
-                entry: averageEntry,
-                close: averageClose,
+                entry: roundThree(getAveragePrice(t.entries, entriesQuantity)),
+                close: roundThree(getAveragePrice(t.closes, exitsQuantity)),
                 traderId,
                 openDate: t.entries[0].openDate,
                 closeDate: t.closes[t.closes.length - 1].openDate,
@@ -65,5 +67,23 @@ export const condenseTrades = (trades: Trade[]) => {
             })
         }
     })
+
+    // Loop through remaining entries and add them to condensed trades but without a close since there is a quantity still open.
+    Object.keys(tradeMap).forEach((symbol) => {
+        const t = tradeMap[symbol]
+        const { traderId } = t.entries[0]
+        const quantity = getTotalQuantity(t.entries)
+        const averageEntry = getAveragePrice(t.entries, quantity)
+        condensedTrades.push({
+            symbol,
+            entry: roundThree(averageEntry),
+            traderId,
+            openDate: t.entries[0].openDate,
+            id: t.entries[0].id,
+            quantity,
+            side: t.entries[0].side
+        })
+    })
+
     return condensedTrades
 }

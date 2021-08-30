@@ -7,7 +7,7 @@ import moment from 'moment'
 import { Box, Grid, TextField } from '@material-ui/core'
 import { getProfitLoss } from '../util/getProfitLoss'
 import { getProfitClass } from '../util/getProfitClass'
-import { roundPenny } from '../util/roundPenny'
+import { roundTwo } from '../util/roundPenny'
 import { condenseTrades } from '../util/condenseTrades'
 
 const History: FC = () => {
@@ -155,15 +155,15 @@ const History: FC = () => {
                                 <Grid item xs={4}>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Profit:</div>
-                                        <div className={getProfitClass(profit)}>{roundPenny(profit)}</div>
+                                        <div className={getProfitClass(profit)}>{roundTwo(profit)}</div>
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Average Winner:</div>
-                                        <div className={getProfitClass(averageWinner)}>{roundPenny(averageWinner)}</div>
+                                        <div className={getProfitClass(averageWinner)}>{roundTwo(averageWinner)}</div>
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Average Loser:</div>
-                                        <div className={getProfitClass(averageLoser)}>{roundPenny(averageLoser)}</div>
+                                        <div className={getProfitClass(averageLoser)}>{roundTwo(averageLoser)}</div>
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Win Percentage:</div>
