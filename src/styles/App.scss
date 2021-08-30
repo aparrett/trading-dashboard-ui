@@ -218,3 +218,16 @@ button {
 .MuiDataGrid-columnHeader  .MuiDataGrid-columnHeaderTitle {
     font-size: 12px!important;
 }
+
+.table-delete-btn {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    font-weight: bold;
+    color: $color-tan-darker;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-red-light;
+    }
+}

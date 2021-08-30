@@ -1,17 +1,17 @@
 import { FC, useState } from 'react'
 import ImportTradesDialog from '../components/ImportTradesDialog'
 import { Trade, useMeQuery, useTradesQuery } from '../generated/graphql'
-import { DataGrid, GridValueGetterParams } from '@material-ui/data-grid'
-import { ISOtoStandard } from '../util/ISOtoStandard'
 import moment from 'moment'
-import { Box, Grid, TextField } from '@material-ui/core'
+import { Grid, TextField } from '@material-ui/core'
 import { getProfitLoss } from '../util/getProfitLoss'
-import { getProfitClass } from '../util/getProfitClass'
-import { roundTwo } from '../util/roundPenny'
 import { condenseTrades } from '../util/condenseTrades'
+import { TradeWithPL } from '../types'
+import { HistoryTable } from '../components/HistoryTable'
+import { HistoryStatistics } from '../components/HistoryStatistics'
 
 const History: FC = () => {
     const [showImportDialog, setShowImportDialog] = useState(false)
+    const [selectedIds, setSelectedIds] = useState<number[]>([])
 
     // Must use this format for date input field to work.
     const today = moment().format('yyyy-MM-DD').toString()
@@ -38,48 +38,13 @@ const History: FC = () => {
         return true
     })
 
-    const condensedTrades = condenseTrades(filteredTrades as Trade[]).map((trade) => {
+    const condensedTrades: TradeWithPL[] = condenseTrades(filteredTrades as Trade[]).map((trade) => {
         const { entry, close, quantity, side } = trade
         return {
             ...trade,
             profitLoss: !close ? 0 : getProfitLoss(entry, close, quantity, side)
         }
     })
-
-    const profit = condensedTrades.reduce((acc, trade) => acc + trade.profitLoss, 0)
-    const tradesWithoutNeutrals = condensedTrades.filter((trade) => trade.profitLoss > 5 || trade.profitLoss < -5)
-    const winners = tradesWithoutNeutrals.filter((trade) => trade.profitLoss >= 0)
-    const losers = tradesWithoutNeutrals.filter((trade) => trade.profitLoss < 0)
-    const averageWinner =
-        winners.length === 0 ? 0 : winners.reduce((acc, trade) => acc + trade.profitLoss, 0) / winners.length
-    const averageLoser =
-        losers.length === 0 ? 0 : losers.reduce((acc, trade) => acc + trade.profitLoss, 0) / losers.length
-
-    const winPercentage =
-        winners.length > 0 && tradesWithoutNeutrals.length > 0
-            ? Math.round((winners.length / tradesWithoutNeutrals.length) * 100)
-            : 0
-
-    const columns = [
-        { field: 'symbol', headerName: 'Symbol' },
-        { field: 'side', headerName: 'Side' },
-        { field: 'quantity', headerName: 'Qty' },
-        { field: 'entry', headerName: 'Entry' },
-        { field: 'close', headerName: 'Close' },
-        { field: 'profitLoss', headerName: 'Profit' },
-        {
-            field: 'openDate',
-            headerName: 'Open Date',
-            width: 160,
-            valueGetter: (v: GridValueGetterParams) => ISOtoStandard(v.value?.toString())
-        },
-        {
-            field: 'closeDate',
-            headerName: 'Close Date',
-            width: 160,
-            valueGetter: (v: GridValueGetterParams) => ISOtoStandard(v.value?.toString())
-        }
-    ]
 
     const handleStartDateChange = (date: string) => {
         // If the start is after the end date, change both to the selected start date.
@@ -131,64 +96,9 @@ const History: FC = () => {
                                 Import
                             </button>
                         </Grid>
-                        <Grid item xs={6}>
-                            <Grid container>
-                                <Grid item xs={4}>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Trades:</div>
-                                        <div>{condensedTrades.length}</div>
-                                    </Box>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Winning Trades:</div>
-                                        <div>{winners.length}</div>
-                                    </Box>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Losing Trades:</div>
-                                        <div>{losers.length}</div>
-                                    </Box>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Neutral Trades:</div>
-                                        <div>{condensedTrades.length - tradesWithoutNeutrals.length}</div>
-                                    </Box>
-                                </Grid>
-                                <Grid item xs={2} />
-                                <Grid item xs={4}>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Profit:</div>
-                                        <div className={getProfitClass(profit)}>{roundTwo(profit)}</div>
-                                    </Box>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Average Winner:</div>
-                                        <div className={getProfitClass(averageWinner)}>{roundTwo(averageWinner)}</div>
-                                    </Box>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Average Loser:</div>
-                                        <div className={getProfitClass(averageLoser)}>{roundTwo(averageLoser)}</div>
-                                    </Box>
-                                    <Box display="flex" justifyContent="space-between">
-                                        <div>Win Percentage:</div>
-                                        <div>{winPercentage}%</div>
-                                    </Box>
-                                </Grid>
-                                <Grid item xs={2} />
-                            </Grid>
-                        </Grid>
+                        <HistoryStatistics trades={condensedTrades} />
                     </Grid>
-                    <div className="trades-table-wrapper">
-                        <DataGrid
-                            columns={columns}
-                            rows={condensedTrades}
-                            checkboxSelection
-                            density="compact"
-                            disableColumnMenu
-                            getCellClassName={(params) => {
-                                if (params.field !== 'profitLoss') {
-                                    return ''
-                                }
-                                return getProfitClass(Number(params.value))
-                            }}
-                        />
-                    </div>
+                    <HistoryTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} trades={condensedTrades} />
                     <ImportTradesDialog
                         open={showImportDialog}
                         onClose={() => setShowImportDialog(false)}

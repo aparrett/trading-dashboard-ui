@@ -1,4 +1,4 @@
-import './App.scss'
+import '../styles/App.scss'
 import Navbar from './Navbar'
 import { FC } from 'react'
 import { ApolloClient, ApolloProvider } from '@apollo/client'
