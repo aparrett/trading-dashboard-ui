@@ -4,6 +4,8 @@ import { useFormik } from 'formik'
 import { DialogActions, DialogContent, Grid, TextField } from '@material-ui/core'
 import { useSnackbar } from 'notistack'
 import moment from 'moment'
+import { formatImportDate } from '../util/formatImportDate'
+import { translateSide } from '../util/csvRowToTrade'
 
 interface ImportTradesJSONProps {
     onClose: () => void
@@ -22,8 +24,9 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose, selectedStartDat
                     trades: JSON.parse(values.trades).map((trade: Trade) => {
                         return {
                             ...trade,
-                            openDate: moment(trade.openDate).format('YYYY-MM-DDTHH:mm:ss.000') + 'Z',
-                            closeDate: moment(trade.closeDate).format('YYYY-MM-DDTHH:mm:ss.000') + 'Z'
+                            side: translateSide(trade.side),
+                            openDate: formatImportDate(trade.openDate),
+                            closeDate: formatImportDate(trade.closeDate)
                         }
                     })
                 }

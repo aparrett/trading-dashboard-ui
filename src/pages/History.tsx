@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import ImportTradesDialog from '../components/ImportTradesDialog'
-import { useMeQuery, useTradesQuery } from '../generated/graphql'
+import { Trade, useMeQuery, useTradesQuery } from '../generated/graphql'
 import { DataGrid, GridValueGetterParams } from '@material-ui/data-grid'
 import { ISOtoStandard } from '../util/ISOtoStandard'
 import moment from 'moment'
@@ -8,6 +8,7 @@ import { Box, Grid, TextField } from '@material-ui/core'
 import { getProfitLoss } from '../util/getProfitLoss'
 import { getProfitClass } from '../util/getProfitClass'
 import { roundPenny } from '../util/roundPenny'
+import { condenseTrades } from '../util/condenseTrades'
 
 const History: FC = () => {
     const [showImportDialog, setShowImportDialog] = useState(false)
@@ -19,23 +20,34 @@ const History: FC = () => {
 
     const { data: meData } = useMeQuery()
     const { data: tradesData } = useTradesQuery()
-    const trades = (tradesData?.trades || [])
-        .filter((trade) => {
-            return (
-                !moment(trade.openDate).isBefore(moment(startDate).startOf('day')) &&
-                !moment(trade.closeDate).isAfter(moment(endDate).endOf('day'))
-            )
-        })
-        .map((trade) => {
-            const { entry, close, quantity, side } = trade
-            return {
-                ...trade,
-                profitLoss: getProfitLoss(entry, close, quantity, side)
-            }
-        })
+    const filteredTrades = (tradesData?.trades || []).filter((trade) => {
+        if (moment(trade.openDate).isBefore(moment(startDate).startOf('day'))) {
+            return false
+        }
 
-    const profit = trades.reduce((acc, trade) => acc + trade.profitLoss, 0)
-    const tradesWithoutNeutrals = trades.filter((trade) => trade.profitLoss > 5 || trade.profitLoss < -5)
+        if (trade.closeDate) {
+            if (moment(trade.closeDate).isAfter(moment(endDate).endOf('day'))) {
+                return false
+            }
+        } else {
+            if (moment(trade.openDate).isAfter(moment(endDate).endOf('day'))) {
+                return false
+            }
+        }
+
+        return true
+    })
+
+    const condensedTrades = condenseTrades(filteredTrades as Trade[]).map((trade) => {
+        const { entry, close, quantity, side } = trade
+        return {
+            ...trade,
+            profitLoss: !close ? 0 : getProfitLoss(entry, close, quantity, side)
+        }
+    })
+
+    const profit = condensedTrades.reduce((acc, trade) => acc + trade.profitLoss, 0)
+    const tradesWithoutNeutrals = condensedTrades.filter((trade) => trade.profitLoss > 5 || trade.profitLoss < -5)
     const winners = tradesWithoutNeutrals.filter((trade) => trade.profitLoss >= 0)
     const losers = tradesWithoutNeutrals.filter((trade) => trade.profitLoss < 0)
     const averageWinner =
@@ -124,7 +136,7 @@ const History: FC = () => {
                                 <Grid item xs={4}>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Trades:</div>
-                                        <div>{trades.length}</div>
+                                        <div>{condensedTrades.length}</div>
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Winning Trades:</div>
@@ -136,7 +148,7 @@ const History: FC = () => {
                                     </Box>
                                     <Box display="flex" justifyContent="space-between">
                                         <div>Neutral Trades:</div>
-                                        <div>{trades.length - tradesWithoutNeutrals.length}</div>
+                                        <div>{condensedTrades.length - tradesWithoutNeutrals.length}</div>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={2} />
@@ -165,7 +177,7 @@ const History: FC = () => {
                     <div className="trades-table-wrapper">
                         <DataGrid
                             columns={columns}
-                            rows={trades}
+                            rows={condensedTrades}
                             checkboxSelection
                             density="compact"
                             disableColumnMenu

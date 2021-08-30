@@ -66,9 +66,9 @@ export type Trade = {
     side: Scalars['String']
     quantity: Scalars['Float']
     entry: Scalars['Float']
-    close: Scalars['Float']
+    close?: Maybe<Scalars['Float']>
     openDate: Scalars['DateTime']
-    closeDate: Scalars['DateTime']
+    closeDate?: Maybe<Scalars['DateTime']>
 }
 
 export type TradeInput = {
@@ -76,9 +76,9 @@ export type TradeInput = {
     side: Scalars['String']
     quantity: Scalars['Float']
     entry: Scalars['Float']
-    close: Scalars['Float']
+    close?: Maybe<Scalars['Float']>
     openDate: Scalars['DateTime']
-    closeDate: Scalars['DateTime']
+    closeDate?: Maybe<Scalars['DateTime']>
 }
 
 export type User = {
