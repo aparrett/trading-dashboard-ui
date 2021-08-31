@@ -27,7 +27,8 @@ const App: FC = () => {
                         horizontal: 'left'
                     }}
                     classes={{
-                        variantSuccess: 'snackbar-success'
+                        variantSuccess: 'snackbar-success',
+                        variantError: 'snackbar-error'
                     }}
                 >
                     <div className="App">

@@ -203,7 +203,11 @@ button {
     }
 
     .snackbar-success {
-        background-color: #adaaa3;
+        background-color: $color-tan-medium;
+    }
+
+    .snackbar-error {
+        background-color: $color-red;
     }
 }
 

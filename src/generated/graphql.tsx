@@ -28,6 +28,7 @@ export type Mutation = {
     login: UserResponse
     logout: Scalars['Boolean']
     saveTrades: Array<Trade>
+    deleteTrades: Scalars['Boolean']
 }
 
 export type MutationChangePasswordArgs = {
@@ -50,6 +51,10 @@ export type MutationLoginArgs = {
 
 export type MutationSaveTradesArgs = {
     trades: Array<TradeInput>
+}
+
+export type MutationDeleteTradesArgs = {
+    ids: Array<Scalars['Int']>
 }
 
 export type Query = {
@@ -101,6 +106,12 @@ export type UsernamePasswordInput = {
     username: Scalars['String']
     password: Scalars['String']
 }
+
+export type DeleteTradesMutationVariables = Exact<{
+    ids: Array<Scalars['Int']>
+}>
+
+export type DeleteTradesMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'deleteTrades'>
 
 export type LoginMutationVariables = Exact<{
     username: Scalars['String']
@@ -157,6 +168,47 @@ export type TradesQuery = { __typename?: 'Query' } & {
     >
 }
 
+export const DeleteTradesDocument = gql`
+    mutation DeleteTrades($ids: [Int!]!) {
+        deleteTrades(ids: $ids)
+    }
+`
+export type DeleteTradesMutationFn = ApolloReactCommon.MutationFunction<
+    DeleteTradesMutation,
+    DeleteTradesMutationVariables
+>
+
+/**
+ * __useDeleteTradesMutation__
+ *
+ * To run a mutation, you first call `useDeleteTradesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTradesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTradesMutation, { data, loading, error }] = useDeleteTradesMutation({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useDeleteTradesMutation(
+    baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteTradesMutation, DeleteTradesMutationVariables>
+) {
+    return ApolloReactHooks.useMutation<DeleteTradesMutation, DeleteTradesMutationVariables>(
+        DeleteTradesDocument,
+        baseOptions
+    )
+}
+export type DeleteTradesMutationHookResult = ReturnType<typeof useDeleteTradesMutation>
+export type DeleteTradesMutationResult = ApolloReactCommon.MutationResult<DeleteTradesMutation>
+export type DeleteTradesMutationOptions = ApolloReactCommon.BaseMutationOptions<
+    DeleteTradesMutation,
+    DeleteTradesMutationVariables
+>
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
         login(usernameOrEmail: $username, password: $password) {

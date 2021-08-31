@@ -1,0 +1,3 @@
+mutation DeleteTrades ($ids: [Int!]!) {
+    deleteTrades(ids: $ids)
+}
