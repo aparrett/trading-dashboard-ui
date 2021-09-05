@@ -14,7 +14,7 @@ const ImportTradesCSV: FC<ImportTradesCSVProps> = ({ onClose }) => {
     const { enqueueSnackbar } = useSnackbar()
     const [saveTrades] = useSaveTradesMutation()
     const [trades, setTrades] = useState<TradeInput[]>([])
-    const [fileName, setFileName] = useState<string | null>(null)
+    const [fileNames, setFileNames] = useState<string[]>([])
     const inputFile = createRef<HTMLInputElement>()
 
     const handleSelectFileClick = () => {
@@ -27,13 +27,16 @@ const ImportTradesCSV: FC<ImportTradesCSVProps> = ({ onClose }) => {
             if (reader.result) {
                 csv()
                     .fromString(reader.result.toString())
-                    .then((rows) => setTrades(rows.map((row) => csvRowToTrade(row))))
+                    .then((rows) => setTrades([...trades, ...rows.map((row) => csvRowToTrade(row))]))
             }
         }
         if (event.currentTarget.files) {
-            const file = event.currentTarget.files[0]
-            reader.readAsText(file)
-            setFileName(file.name)
+            const { length } = event.currentTarget.files
+            for (let i = 0; i < length; i++) {
+                const file = event.currentTarget.files[i]
+                reader.readAsText(file)
+                setFileNames([...fileNames, file.name])
+            }
         }
     }
 
@@ -63,7 +66,7 @@ const ImportTradesCSV: FC<ImportTradesCSVProps> = ({ onClose }) => {
                     <button type="button" className="button outlined-light" onClick={handleSelectFileClick}>
                         Select File
                     </button>
-                    {fileName && <div style={{ marginTop: '15px' }}>{fileName}</div>}
+                    {fileNames.map((fileName) => <div style={{ marginTop: '15px' }}>{fileName}</div>)}
                 </div>
             </DialogContent>
             <DialogActions>
