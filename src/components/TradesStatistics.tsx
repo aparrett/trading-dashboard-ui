@@ -4,11 +4,11 @@ import { TradeWithPL } from '../types'
 import { getProfitClass } from '../util/getProfitClass'
 import { roundTwo } from '../util/roundPenny'
 
-interface HistoryStatisticsProps {
+interface TradesStatisticsProps {
     trades: TradeWithPL[]
 }
 
-export const HistoryStatistics: FC<HistoryStatisticsProps> = ({ trades }) => {
+export const TradesStatistics: FC<TradesStatisticsProps> = ({ trades }) => {
     const profit = trades.reduce((acc, trade) => acc + trade.profitLoss, 0)
     const tradesWithoutNeutrals = trades.filter((trade) => trade.profitLoss > 5 || trade.profitLoss < -5)
     const winners = tradesWithoutNeutrals.filter((trade) => trade.profitLoss >= 0)

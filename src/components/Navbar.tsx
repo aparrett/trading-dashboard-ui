@@ -32,8 +32,8 @@ const Navbar: FC = () => {
                     <Link to="/">
                         <button className="button outlined-light">Overview</button>
                     </Link>
-                    <Link to="/history">
-                        <button className="button outlined-light">History</button>
+                    <Link to="/trades">
+                        <button className="button outlined-light">Trades</button>
                     </Link>
                 </div>
                 <Box display="flex" justifyContent="flex-end">

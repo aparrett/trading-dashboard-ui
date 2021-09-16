@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack'
 import { FC } from 'react'
 import { TradesDocument, useDeleteTradesMutation } from '../generated/graphql'
 
-export const HistoryTableFooter: FC<{ selectedIds: number[] }> = ({ selectedIds }) => {
+export const TradesTableFooter: FC<{ selectedIds: number[] }> = ({ selectedIds }) => {
     const [deleteTrades] = useDeleteTradesMutation()
     const { enqueueSnackbar } = useSnackbar()
 

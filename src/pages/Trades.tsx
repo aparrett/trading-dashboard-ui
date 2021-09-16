@@ -6,10 +6,10 @@ import { Grid, TextField } from '@material-ui/core'
 import { getProfitLoss } from '../util/getProfitLoss'
 import { condenseTrades } from '../util/condenseTrades'
 import { TradeWithPL } from '../types'
-import { HistoryTable } from '../components/HistoryTable'
-import { HistoryStatistics } from '../components/HistoryStatistics'
+import { TradesTable } from '../components/TradesTable'
+import { TradesStatistics } from '../components/TradesStatistics'
 
-const History: FC = () => {
+const Trades: FC = () => {
     const [showImportDialog, setShowImportDialog] = useState(false)
     const [selectedIds, setSelectedIds] = useState<number[]>([])
 
@@ -66,7 +66,7 @@ const History: FC = () => {
 
     return (
         <div>
-            <h1>History</h1>
+            <h1>Trades</h1>
             {meData?.me ? (
                 <div>
                     <Grid container>
@@ -96,9 +96,9 @@ const History: FC = () => {
                                 Import
                             </button>
                         </Grid>
-                        <HistoryStatistics trades={condensedTrades} />
+                        <TradesStatistics trades={condensedTrades} />
                     </Grid>
-                    <HistoryTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} trades={condensedTrades} />
+                    <TradesTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} trades={condensedTrades} />
                     <ImportTradesDialog
                         open={showImportDialog}
                         onClose={() => setShowImportDialog(false)}
@@ -112,4 +112,4 @@ const History: FC = () => {
     )
 }
 
-export default History
+export default Trades
