@@ -1,13 +1,14 @@
 import { FC, useState } from 'react'
-import ImportTradesDialog from '../components/ImportTradesDialog'
-import { Trade, useMeQuery, useTradesQuery } from '../generated/graphql'
+import ImportTradesDialog from './ImportTradesDialog'
+import { Trade, useMeQuery, useTradesQuery } from '../../generated/graphql'
 import moment from 'moment'
 import { Grid, TextField } from '@material-ui/core'
-import { getProfitLoss } from '../util/getProfitLoss'
-import { condenseTrades } from '../util/condenseTrades'
-import { TradeWithPL } from '../types'
-import { TradesTable } from '../components/TradesTable'
-import { TradesStatistics } from '../components/TradesStatistics'
+import { getProfitLoss } from '../../util/getProfitLoss'
+import { condenseTrades } from '../../util/condenseTrades'
+import { TradeWithPL } from '../../types'
+import { TradesTable } from './TradesTable'
+import { TradesStatistics } from './TradesStatistics'
+import './Trades.scss'
 
 const Trades: FC = () => {
     const [showImportDialog, setShowImportDialog] = useState(false)

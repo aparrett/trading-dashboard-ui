@@ -1,9 +1,9 @@
 import { ChangeEvent, createRef, FC, useState } from 'react'
-import { TradeInput, TradesDocument, useSaveTradesMutation } from '../generated/graphql'
+import { TradeInput, TradesDocument, useSaveTradesMutation } from '../../generated/graphql'
 import { useFormik } from 'formik'
 import { DialogActions, DialogContent } from '@material-ui/core'
 import csv from 'csvtojson'
-import { csvRowToTrade } from '../util/csvRowToTrade'
+import { csvRowToTrade } from '../../util/csvRowToTrade'
 import { useSnackbar } from 'notistack'
 
 interface ImportTradesCSVProps {

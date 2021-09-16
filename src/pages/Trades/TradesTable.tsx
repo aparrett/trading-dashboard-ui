@@ -1,8 +1,8 @@
 import { DataGrid, GridValueGetterParams } from '@material-ui/data-grid'
 import { FC } from 'react'
-import { TradeWithPL } from '../types'
-import { getProfitClass } from '../util/getProfitClass'
-import { ISOtoStandard } from '../util/ISOtoStandard'
+import { TradeWithPL } from '../../types'
+import { getProfitClass } from '../../util/getProfitClass'
+import { ISOtoStandard } from '../../util/ISOtoStandard'
 import { TradesTableFooter } from './TradesTableFooter'
 
 interface TradesTableProps {

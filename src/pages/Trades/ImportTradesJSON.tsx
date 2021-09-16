@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { Trade, TradesDocument, useSaveTradesMutation } from '../generated/graphql'
+import { Trade, TradesDocument, useSaveTradesMutation } from '../../generated/graphql'
 import { useFormik } from 'formik'
 import { DialogActions, DialogContent, Grid, TextField } from '@material-ui/core'
 import { useSnackbar } from 'notistack'
 import moment from 'moment'
-import { formatImportDate } from '../util/formatImportDate'
-import { translateSide } from '../util/csvRowToTrade'
-import { roundThree } from '../util/roundPenny'
+import { formatImportDate } from '../../util/formatImportDate'
+import { translateSide } from '../../util/csvRowToTrade'
+import { roundThree } from '../../util/roundPenny'
 
 interface ImportTradesJSONProps {
     onClose: () => void

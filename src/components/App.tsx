@@ -5,7 +5,8 @@ import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { cache } from '../cache'
 import { API_URL } from '../config'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Trades from '../pages/Trades'
+import Trades from '../pages/Trades/Trades'
+import Overview from '../pages/Overview/Overview'
 import { Container } from '@material-ui/core'
 import { SnackbarProvider } from 'notistack'
 
@@ -36,8 +37,7 @@ const App: FC = () => {
                             <Navbar />
                             <Switch>
                                 <Route exact path="/">
-                                    <h1>Overview</h1>
-                                    <div>Under Construction</div>
+                                    <Overview />
                                 </Route>
                                 <Route exact path="/trades">
                                     <Trades />

@@ -18,7 +18,8 @@ const getTotalQuantity = (trades: Trade[]) => {
 export const condenseTrades = (trades: Trade[]) => {
     const tradeMap: { [x: string]: { entries: Trade[]; closes?: Trade[] } } = {}
     const condensedTrades: Trade[] = []
-    const sortedTrades = trades.sort((a, b) => (moment(a.openDate).isAfter(moment(b.openDate)) ? 1 : -1))
+    // Slice creates a new array as to not mutate the original list (and make strict mode happy).
+    const sortedTrades = trades.slice().sort((a, b) => (moment(a.openDate).isAfter(moment(b.openDate)) ? 1 : -1))
     sortedTrades.forEach((trade): any => {
         const { close, side, symbol, traderId } = trade
         if (close) {

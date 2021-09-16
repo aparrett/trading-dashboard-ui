@@ -1,7 +1,7 @@
 import { GridPagination } from '@material-ui/data-grid'
 import { useSnackbar } from 'notistack'
 import { FC } from 'react'
-import { TradesDocument, useDeleteTradesMutation } from '../generated/graphql'
+import { TradesDocument, useDeleteTradesMutation } from '../../generated/graphql'
 
 export const TradesTableFooter: FC<{ selectedIds: number[] }> = ({ selectedIds }) => {
     const [deleteTrades] = useDeleteTradesMutation()
