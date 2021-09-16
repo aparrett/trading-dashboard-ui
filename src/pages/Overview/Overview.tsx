@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import './Overview.scss'
@@ -9,14 +9,17 @@ import { condenseTrades } from '../../util/condenseTrades'
 import moment from 'moment'
 import { getProfitClass } from '../../util/getProfitClass'
 import { roundTwo } from '../../util/roundPenny'
+import { TradesStatistics } from '../Trades/TradesStatistics'
 
 const Overview: FC = () => {
+    const [currentMonth, setCurrentMonth] = useState<number>()
     const { data: tradesData } = useTradesQuery()
     const trades = tradesData?.trades || []
 
     // Create a map of dates to profit losses.
     const dateMap: { [x: string]: number } = {}
-    condenseTrades(trades as Trade[]).forEach((trade) => {
+    const condensedTrades = condenseTrades(trades as Trade[])
+    condensedTrades.forEach((trade) => {
         const { entry, close, quantity, side } = trade
         if (!close) {
             return
@@ -38,10 +41,20 @@ const Overview: FC = () => {
         textColor: plColors[getProfitClass(dateMap[date]) || 'green']
     }))
 
+    const filteredTrades = condensedTrades.filter((trade) => new Date(trade.openDate).getMonth() === currentMonth)
+
     return (
         <div>
             <h1>Overview</h1>
-            <FullCalendar showNonCurrentDates={false} plugins={[dayGridPlugin]} initialView="dayGridMonth" events={events} />
+            <TradesStatistics trades={filteredTrades} />
+            <br />
+            <FullCalendar
+                showNonCurrentDates={false}
+                plugins={[dayGridPlugin]}
+                initialView="dayGridMonth"
+                events={events}
+                datesSet={(info) => setCurrentMonth(info.start.getMonth())}
+            />
         </div>
     )
 }

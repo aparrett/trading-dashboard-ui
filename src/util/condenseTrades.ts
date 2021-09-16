@@ -1,6 +1,8 @@
 import { Trade } from '../generated/graphql'
 import moment from 'moment'
 import { roundThree } from './roundPenny'
+import { getProfitLoss } from './getProfitLoss'
+import { TradeWithPL } from '../types'
 
 const getAveragePrice = (trades: Trade[], quantity: number) => {
     return (
@@ -15,7 +17,7 @@ const getTotalQuantity = (trades: Trade[]) => {
     return trades.reduce((acc, curr) => acc + curr.quantity, 0)
 }
 
-export const condenseTrades = (trades: Trade[]) => {
+export const condenseTrades = (trades: Trade[]): TradeWithPL[] => {
     const tradeMap: { [x: string]: { entries: Trade[]; closes?: Trade[] } } = {}
     const condensedTrades: Trade[] = []
     // Slice creates a new array as to not mutate the original list (and make strict mode happy).
@@ -86,5 +88,11 @@ export const condenseTrades = (trades: Trade[]) => {
         })
     })
 
-    return condensedTrades
+    return condensedTrades.map((trade) => {
+        const { entry, close, quantity, side } = trade
+        return {
+            ...trade,
+            profitLoss: !close ? 0 : getProfitLoss(entry, close, quantity, side)
+        }
+    })
 }

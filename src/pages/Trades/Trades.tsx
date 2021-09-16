@@ -39,13 +39,7 @@ const Trades: FC = () => {
         return true
     })
 
-    const condensedTrades: TradeWithPL[] = condenseTrades(filteredTrades as Trade[]).map((trade) => {
-        const { entry, close, quantity, side } = trade
-        return {
-            ...trade,
-            profitLoss: !close ? 0 : getProfitLoss(entry, close, quantity, side)
-        }
-    })
+    const condensedTrades = condenseTrades(filteredTrades as Trade[])
 
     const handleStartDateChange = (date: string) => {
         // If the start is after the end date, change both to the selected start date.
