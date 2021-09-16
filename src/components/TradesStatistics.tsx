@@ -1,8 +1,8 @@
 import { Box, Grid } from '@material-ui/core'
 import { FC } from 'react'
-import { TradeWithPL } from '../../types'
-import { getProfitClass } from '../../util/getProfitClass'
-import { roundTwo } from '../../util/roundPenny'
+import { TradeWithPL } from '../types'
+import { getProfitClass } from '../util/getProfitClass'
+import { roundTwo } from '../util/roundPenny'
 
 interface TradesStatisticsProps {
     trades: TradeWithPL[]

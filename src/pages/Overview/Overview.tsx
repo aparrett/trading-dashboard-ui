@@ -9,7 +9,7 @@ import { condenseTrades } from '../../util/condenseTrades'
 import moment from 'moment'
 import { getProfitClass } from '../../util/getProfitClass'
 import { roundTwo } from '../../util/roundPenny'
-import { TradesStatistics } from '../Trades/TradesStatistics'
+import { TradesStatistics } from '../../components/TradesStatistics'
 
 const Overview: FC = () => {
     const [currentMonth, setCurrentMonth] = useState<number>()
