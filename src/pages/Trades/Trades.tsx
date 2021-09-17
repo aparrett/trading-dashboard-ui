@@ -20,21 +20,12 @@ const Trades: FC = () => {
     const { data: meData } = useMeQuery()
     const { data: tradesData } = useTradesQuery()
     const filteredTrades = (tradesData?.trades || []).filter((trade) => {
-        if (moment(trade.openDate).isBefore(moment(startDate).startOf('day'))) {
-            return false
-        }
-
-        if (trade.closeDate) {
-            if (moment(trade.closeDate).isAfter(moment(endDate).endOf('day'))) {
-                return false
-            }
-        } else {
-            if (moment(trade.openDate).isAfter(moment(endDate).endOf('day'))) {
-                return false
-            }
-        }
-
-        return true
+        // Always use the close date to filter if it exists.
+        const filterDate = trade.closeDate || trade.openDate
+        return (
+            !moment(filterDate).isBefore(moment(startDate).startOf('day')) &&
+            !moment(filterDate).isAfter(moment(endDate).endOf('day'))
+        )
     })
 
     const condensedTrades = condenseTrades(filteredTrades as Trade[])

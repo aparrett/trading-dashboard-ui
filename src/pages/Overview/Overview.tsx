@@ -41,7 +41,7 @@ const Overview: FC = () => {
         textColor: plColors[getProfitClass(dateMap[date]) || 'green']
     }))
 
-    const filteredTrades = condensedTrades.filter((trade) => new Date(trade.openDate).getMonth() === currentMonth)
+    const filteredTrades = condensedTrades.filter((trade) => trade.closeDate && new Date(trade.closeDate).getMonth() === currentMonth)
 
     return (
         <div>
