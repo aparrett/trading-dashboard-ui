@@ -1,8 +1,13 @@
 @import '../styles/shared.scss';
 
 html {
-    background: $color-tan-light;
-    color: $color-tan-darker;
+    background: #f5f7fb;
+    color: $color-black;
+    height: 100%;
+}
+
+body, #root, .app {
+    height: 100%;
 }
 
 a {
@@ -21,7 +26,7 @@ body {
     }
 
     .MuiCheckbox-colorPrimary.Mui-checked {
-        color: $color-tan-medium;
+        color: $color-green-4;
     }
 
     .MuiDataGrid-root .MuiDataGrid-row.Mui-selected, .MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover {
@@ -37,19 +42,49 @@ body {
     color: #6cc75c;
 }
 
+h1.title {
+    font-size:18px;
+    color: $color-green-6;
+}
+
+.app {
+    display: flex;
+}
+
 /** NAVBAR **/
 
 .navbar {
-    margin: 20px 0;
+    background-color: $color-green-4;
+    height: 100%;
+    align-content: space-between;
+    display: flex;
+    flex-flow: row wrap;
+    width: 48px;    
 
-    .button {
-        margin: 3px 10px 3px 0;
+    .MuiSvgIcon-root {
+        width: 40px;
+        fill: #fff;
+        font-size: 26px;
+        padding: 4px 4px;
+        cursor: pointer;
+
+        &:hover {
+            fill: $color-green-7;
+        }
+    }
+
+    .nav {
+        margin-top: 45px;
+    }
+
+    .nav-account {
+        margin-bottom: 10px;
     }
 }
 
 .logo {
     font-family: 'Zen Tokyo Zoo', cursive;
-    color: $color-tan-medium;
+    color: $color-green-4;
     padding-top: 9px;
     font-size: 24px;
     margin-right: 50px;
@@ -65,8 +100,9 @@ body {
     align-items: center;
     margin-right: 15px;
     margin-top: -1px;
-    color: $color-tan-dark;
+    color: $color-green-5;
 }
+
 
 /** BUTTONS **/
 
@@ -77,36 +113,36 @@ button {
 .button {
     padding: 12px;
     font-size: 12px;
-    color: $color-tan-light;
+    color: $color-green;
     font-weight: bold;
-    background-color: $color-tan-darker;
+    background-color: $color-green-6;
 
     &:hover {
         cursor: pointer;
-        color: $color-tan-light-2;
+        color: $color-green-3;
     }
 
     &.light {
-        background-color: $color-tan-light-2;
-        color: $color-tan-dark;
+        background-color: $color-green-3;
+        color: $color-green-5;
         &:hover {
-            color: $color-tan-darker;
+            color: $color-green-6;
         }
     }
 
     &.dark {
-        background-color: $color-tan-medium;
-        color: $color-tan-light;
+        background-color: $color-green-4;
+        color: $color-green;
         &:hover {
-            color: $color-tan-darker;
+            color: $color-green-6;
         }
     }
 
     &.outlined-light {
-        background-color: #f1f0eb;
-        border-color: #f1f0eb;
-        border: 1px solid #e2dfd2!important;
-        color: $color-tan-dark;
+        background-color: $color-green;
+        border-color: $color-green;
+        border: 1px solid $color-green-3!important;
+        color: $color-green-5;
         &:hover {
             color: $color-red-light;
             border-color: $color-red-light!important;
@@ -122,7 +158,7 @@ button {
     }
 
     .MuiDialog-paper {
-        background-color: $color-tan-light;
+        background-color: $color-green;
         box-shadow: none;
         border-radius: 0;
         transition: none;
@@ -134,16 +170,16 @@ button {
 }
 
 .MuiInput-underline:before {
-    border-bottom: 2px solid #e2dfd2!important;
+    border-bottom: 2px solid $color-green-3!important;
 }
 
 .MuiFormLabel-root.Mui-focused {
-    color: $color-tan-medium!important;
+    color: $color-green-4!important;
     font-weight: bold!important;
 }
 
 .MuiInput-underline:after { 
-    border-bottom: 2px solid $color-tan-medium!important;
+    border-bottom: 2px solid $color-green-4!important;
 }
 
 .MuiDialog-paperWidthSm {
@@ -165,7 +201,7 @@ button {
     }
 
     .snackbar-success {
-        background-color: $color-tan-medium;
+        background-color: $color-green-4;
     }
 
     .snackbar-error {
@@ -175,4 +211,10 @@ button {
 
 .MuiDataGrid-columnHeader  .MuiDataGrid-columnHeaderTitle {
     font-size: 12px!important;
+}
+
+
+.content-box {
+    background-color: #fff;
+    padding: 10px;
 }

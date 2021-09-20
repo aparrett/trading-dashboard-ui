@@ -23,7 +23,7 @@ export const TradesStatistics: FC<TradesStatisticsProps> = ({ trades }) => {
             ? Math.round((winners.length / tradesWithoutNeutrals.length) * 100)
             : 0
     return (
-        <Grid item xs={6}>
+        <Grid item xs={6} className="content-box">
             <Grid container>
                 <Grid item xs={4}>
                     <Box display="flex" justifyContent="space-between">

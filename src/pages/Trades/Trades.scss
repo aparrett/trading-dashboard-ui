@@ -7,12 +7,12 @@
         height: 48px;
         text-align: center;
         padding: 15px 0;      
-        background-color: $color-tan-light-2;
+        background-color: $color-green-3;
         cursor: pointer;
-        color: $color-tan-dark;
+        color: $color-green-5;
     }
     & > div.active {
-        background-color: $color-tan-light;
+        background-color: $color-green;
     }
 }
 
@@ -31,7 +31,7 @@
     }
 
     textarea {
-        background-color: #e2dfd2;
+        background-color: $color-green-3;
         padding: 10px;
         font-size: 13px;
         font-family: monospace;
@@ -44,7 +44,7 @@
     align-items: center;
     margin-left: 16px;
     font-weight: bold;
-    color: $color-tan-darker;
+    color: $color-green-6;
     cursor: pointer;
 
     &:hover {

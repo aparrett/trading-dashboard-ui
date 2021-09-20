@@ -50,7 +50,7 @@ const Trades: FC = () => {
 
     return (
         <div>
-            <h1>Trades</h1>
+            <h1 className="title">Trades</h1>
             {meData?.me ? (
                 <div>
                     <Grid container>

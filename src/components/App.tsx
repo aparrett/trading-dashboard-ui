@@ -19,22 +19,22 @@ const client = new ApolloClient({
 const App: FC = () => {
     return (
         <ApolloProvider client={client}>
-            <Container>
-                <SnackbarProvider
-                    className="snackbar"
-                    maxSnack={3}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left'
-                    }}
-                    classes={{
-                        variantSuccess: 'snackbar-success',
-                        variantError: 'snackbar-error'
-                    }}
-                >
-                    <div className="App">
-                        <Router>
-                            <Navbar />
+            <SnackbarProvider
+                className="snackbar"
+                maxSnack={3}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                }}
+                classes={{
+                    variantSuccess: 'snackbar-success',
+                    variantError: 'snackbar-error'
+                }}
+            >
+                <div className="app">
+                    <Router>
+                        <Navbar />
+                        <Container>
                             <Switch>
                                 <Route exact path="/">
                                     <Overview />
@@ -43,10 +43,10 @@ const App: FC = () => {
                                     <Trades />
                                 </Route>
                             </Switch>
-                        </Router>
-                    </div>
-                </SnackbarProvider>
-            </Container>
+                        </Container>
+                    </Router>
+                </div>
+            </SnackbarProvider>
         </ApolloProvider>
     )
 }
