@@ -4,17 +4,19 @@ import { useLogoutMutation, useMeQuery } from '../generated/graphql'
 import { cache } from '../cache'
 import { Link, useHistory } from 'react-router-dom'
 import { AccountCircle, Assessment, ViewList } from '@material-ui/icons'
+import { useApolloClient } from '@apollo/client'
 
 const Navbar: FC = () => {
     const [accountMenuAnchor, setAccountMenuAnchor] = useState<SVGSVGElement | null>(null)
     const [logout] = useLogoutMutation()
     const { data: meData } = useMeQuery()
     const history = useHistory()
+    const client = useApolloClient()
 
     const handleLogout = async () => {
         const res = await logout()
         if (res?.data?.logout) {
-            cache.evict({ fieldName: 'me' })
+            client.clearStore()
             history.push('/login')
         } else {
             // TODO: use toast alert.
