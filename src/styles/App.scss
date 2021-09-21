@@ -11,7 +11,8 @@ body, #root, .app {
 }
 
 a {
-    color: inherit;
+    color: $color-green-6;
+    font-weight: bold;
     text-decoration: none!important;
 }
 
@@ -118,21 +119,25 @@ button {
 
 .button {
     padding: 12px;
-    font-size: 12px;
-    color: $color-green;
+    font-size: 14px;
+    color: #fff;
     font-weight: bold;
-    background-color: $color-green-6;
+    background-color: $color-green-4;
+
+    &.full {
+        width: 100%;
+    }
 
     &:hover {
         cursor: pointer;
-        color: $color-green-3;
+        background-color: $color-green-3;
     }
 
     &.light {
-        background-color: $color-green-3;
-        color: $color-green-5;
+        background-color: $color-green-7;
+        color: $color-green-2;
         &:hover {
-            color: $color-green-6;
+            background-color: $color-green-8;
         }
     }
 
@@ -223,4 +228,10 @@ button {
 .content-box {
     background-color: #fff;
     padding: 10px;
+}
+
+.center-content-vertically {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
