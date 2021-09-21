@@ -4,6 +4,7 @@ import { useLogoutMutation, useMeQuery } from '../generated/graphql'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { AccountCircle, Assessment, ViewList } from '@material-ui/icons'
 import { useApolloClient } from '@apollo/client'
+import { useSnackbar } from 'notistack'
 
 const Navbar: FC = () => {
     const [accountMenuAnchor, setAccountMenuAnchor] = useState<SVGSVGElement | null>(null)
@@ -12,7 +13,7 @@ const Navbar: FC = () => {
     const history = useHistory()
     const client = useApolloClient()
     const location = useLocation()
-    console.log(location)
+    const { enqueueSnackbar } = useSnackbar()
 
     const handleLogout = async () => {
         const res = await logout()
@@ -20,8 +21,7 @@ const Navbar: FC = () => {
             client.clearStore()
             history.push('/login')
         } else {
-            // TODO: use toast alert.
-            alert('Something went wrong.')
+            enqueueSnackbar('Logout failed.', { variant: 'error' })
         }
     }
 
