@@ -84,6 +84,10 @@ $navbarWidth: 48px;
     .nav-account {
         margin-bottom: 10px;
     }
+
+    .active {
+        background-color: $color-green-6;
+    }
 }
 
 .nav-account-menu {

@@ -1,8 +1,7 @@
 import { Box, Menu, MenuItem } from '@material-ui/core'
 import { FC, useState, MouseEvent } from 'react'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
-import { cache } from '../cache'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { AccountCircle, Assessment, ViewList } from '@material-ui/icons'
 import { useApolloClient } from '@apollo/client'
 
@@ -12,6 +11,8 @@ const Navbar: FC = () => {
     const { data: meData } = useMeQuery()
     const history = useHistory()
     const client = useApolloClient()
+    const location = useLocation()
+    console.log(location)
 
     const handleLogout = async () => {
         const res = await logout()
@@ -32,15 +33,19 @@ const Navbar: FC = () => {
         setAccountMenuAnchor(null)
     }
 
+    const getActiveClass = (path: string) => {
+        return location.pathname === path ? 'active' : ''
+    }
+
     return (
         <div>
             <Box className="navbar">
                 <div className="nav">
                     <Link to="/">
-                        <Assessment />
+                        <Assessment className={getActiveClass('/')} />
                     </Link>
                     <Link to="/trades">
-                        <ViewList />
+                        <ViewList className={getActiveClass('/trades')} />
                     </Link>
                 </div>
                 <div className="nav-account">
