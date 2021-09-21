@@ -65,7 +65,7 @@ h1.title {
         width: 40px;
         fill: #fff;
         font-size: 26px;
-        padding: 4px 4px;
+        padding: 10px 4px;
         cursor: pointer;
 
         &:hover {
@@ -82,16 +82,22 @@ h1.title {
     }
 }
 
-.logo {
-    font-family: 'Zen Tokyo Zoo', cursive;
-    color: $color-green-4;
-    padding-top: 9px;
-    font-size: 24px;
-    margin-right: 50px;
+.nav-account-menu {
+    margin-left: 32px;
 
-    &:hover {
-        cursor: pointer;
-        color: $color-red;
+    .MuiMenu-paper {
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #24caae;
+        color: #fff;
+    }
+
+    li.MuiListItem-root {
+        padding-top: 0;
+        padding-bottom: 0;
+        & + li.MuiListItem-root {
+            margin-top: 6px;
+        }
     }
 }
 

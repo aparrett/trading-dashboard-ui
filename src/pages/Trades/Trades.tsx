@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import ImportTradesDialog from './ImportTradesDialog'
-import { Trade, useMeQuery, useTradesQuery } from '../../generated/graphql'
+import { Trade, useTradesQuery } from '../../generated/graphql'
 import moment from 'moment'
 import { Grid, TextField } from '@material-ui/core'
 import { condenseTrades } from '../../util/condenseTrades'
@@ -17,7 +17,6 @@ const Trades: FC = () => {
     const [startDate, setStartDate] = useState(today)
     const [endDate, setEndDate] = useState(today)
 
-    const { data: meData } = useMeQuery()
     const { data: tradesData } = useTradesQuery()
     const filteredTrades = (tradesData?.trades || []).filter((trade) => {
         // Always use the close date to filter if it exists.
@@ -51,47 +50,43 @@ const Trades: FC = () => {
     return (
         <div>
             <h1 className="title">Trades</h1>
-            {meData?.me ? (
-                <div>
-                    <Grid container>
-                        <Grid item xs={6}>
-                            <TextField
-                                label="Start Date"
-                                defaultValue={startDate}
-                                value={startDate}
-                                onChange={(e) => handleStartDateChange(e.target.value)}
-                                type="date"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                            <TextField
-                                label="End Date"
-                                defaultValue={endDate}
-                                value={endDate}
-                                onChange={(e) => handleEndDateChange(e.target.value)}
-                                type="date"
-                                InputLabelProps={{ shrink: true }}
-                                style={{ marginLeft: '20px' }}
-                            />
-                            <button
-                                className="button light link"
-                                style={{ marginLeft: '40px', marginTop: '2px' }}
-                                onClick={() => setShowImportDialog(true)}
-                            >
-                                Import
-                            </button>
-                        </Grid>
-                        <TradesStatistics trades={condensedTrades} />
+            <div>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <TextField
+                            label="Start Date"
+                            defaultValue={startDate}
+                            value={startDate}
+                            onChange={(e) => handleStartDateChange(e.target.value)}
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
+                        />
+                        <TextField
+                            label="End Date"
+                            defaultValue={endDate}
+                            value={endDate}
+                            onChange={(e) => handleEndDateChange(e.target.value)}
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
+                            style={{ marginLeft: '20px' }}
+                        />
+                        <button
+                            className="button light link"
+                            style={{ marginLeft: '40px', marginTop: '2px' }}
+                            onClick={() => setShowImportDialog(true)}
+                        >
+                            Import
+                        </button>
                     </Grid>
-                    <TradesTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} trades={condensedTrades} />
-                    <ImportTradesDialog
-                        open={showImportDialog}
-                        onClose={() => setShowImportDialog(false)}
-                        selectedStartDate={startDate}
-                    />
-                </div>
-            ) : (
-                <div>Login to import and analyze your trades.</div>
-            )}
+                    <TradesStatistics trades={condensedTrades} />
+                </Grid>
+                <TradesTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} trades={condensedTrades} />
+                <ImportTradesDialog
+                    open={showImportDialog}
+                    onClose={() => setShowImportDialog(false)}
+                    selectedStartDate={startDate}
+                />
+            </div>
         </div>
     )
 }

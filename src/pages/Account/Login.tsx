@@ -1,33 +1,32 @@
 import { FC } from 'react'
 import { useFormik } from 'formik'
-import { useRegisterMutation, MeQuery, MeDocument } from '../generated/graphql'
+import { MeQuery, MeDocument, useLoginMutation } from '../../generated/graphql'
 import { TextField } from '@material-ui/core'
-import { toErrorMap } from '../util/toErrorMap'
+import { toErrorMap } from '../../util/toErrorMap'
 import { useHistory, useLocation } from 'react-router'
 
-const Register: FC = () => {
-    const [register] = useRegisterMutation()
+const Login: FC = () => {
+    const [login] = useLoginMutation()
     const history = useHistory()
     const location = useLocation<{ from: string | undefined }>()
-
     const formik = useFormik({
-        initialValues: { email: '', username: '', password: '' },
+        initialValues: { username: '', password: '' },
         onSubmit: async (values, { setErrors, resetForm }) => {
-            const response = await register({
-                variables: { options: values },
+            const response = await login({
+                variables: { ...values },
                 update: (cache, { data }) => {
                     cache.writeQuery<MeQuery>({
                         query: MeDocument,
                         data: {
                             __typename: 'Query',
-                            me: data?.register.user
+                            me: data?.login.user
                         }
                     })
                 }
             })
 
-            const errors = response?.data?.register?.errors
-            const user = response?.data?.register?.user
+            const errors = response?.data?.login?.errors
+            const user = response?.data?.login?.user
             if (errors) {
                 setErrors(toErrorMap(errors))
             } else if (user) {
@@ -38,7 +37,7 @@ const Register: FC = () => {
     })
     return (
         <form onSubmit={formik.handleSubmit}>
-            <h1 className="title">REGISTER</h1>
+            <h1 className="title">Login</h1>
             <TextField
                 autoFocus
                 margin="dense"
@@ -52,17 +51,6 @@ const Register: FC = () => {
             />
             <TextField
                 margin="dense"
-                name="email"
-                label="EMAIL ADDRESS"
-                type="email"
-                fullWidth
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-            />
-            <TextField
-                margin="dense"
                 name="password"
                 label="PASSWORD"
                 type="password"
@@ -73,10 +61,10 @@ const Register: FC = () => {
                 helperText={formik.touched.password && formik.errors.password}
             />
             <button className="button link dark" type="submit">
-                REGISTER
+                LOGIN
             </button>
         </form>
     )
 }
 
-export default Register
+export default Login

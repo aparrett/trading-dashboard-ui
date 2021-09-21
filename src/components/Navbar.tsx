@@ -1,23 +1,21 @@
 import { Box, Menu, MenuItem } from '@material-ui/core'
 import { FC, useState, MouseEvent } from 'react'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
-import LoginDialog from './LoginDialog'
-import RegisterDialog from './RegisterDialog'
 import { cache } from '../cache'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { AccountCircle, Assessment, ViewList } from '@material-ui/icons'
 
 const Navbar: FC = () => {
     const [accountMenuAnchor, setAccountMenuAnchor] = useState<SVGSVGElement | null>(null)
-    const [showLoginDialog, setShowLoginDialog] = useState(false)
-    const [showRegisterDialog, setShowRegisterDialog] = useState(false)
     const [logout] = useLogoutMutation()
     const { data: meData } = useMeQuery()
+    const history = useHistory()
 
     const handleLogout = async () => {
         const res = await logout()
         if (res?.data?.logout) {
             cache.evict({ fieldName: 'me' })
+            history.push('/login')
         } else {
             // TODO: use toast alert.
             alert('Something went wrong.')
@@ -50,6 +48,7 @@ const Navbar: FC = () => {
                         keepMounted
                         open={Boolean(accountMenuAnchor)}
                         onClose={handleAccountMenuClose}
+                        className="nav-account-menu"
                     >
                         {meData?.me ? (
                             <MenuItem
@@ -61,30 +60,28 @@ const Navbar: FC = () => {
                                 Logout
                             </MenuItem>
                         ) : (
-                            <>
+                            <div>
                                 <MenuItem
                                     onClick={() => {
-                                        setShowLoginDialog(true)
                                         handleAccountMenuClose()
+                                        history.push('/login')
                                     }}
                                 >
                                     Login
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => {
-                                        setShowRegisterDialog(true)
                                         handleAccountMenuClose()
+                                        history.push('/register')
                                     }}
                                 >
                                     Register
                                 </MenuItem>
-                            </>
+                            </div>
                         )}
                     </Menu>
                 </div>
             </Box>
-            <RegisterDialog open={showRegisterDialog} onClose={() => setShowRegisterDialog(false)} />
-            <LoginDialog open={showLoginDialog} onClose={() => setShowLoginDialog(false)} />
         </div>
     )
 }
