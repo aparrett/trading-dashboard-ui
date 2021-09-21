@@ -10,7 +10,7 @@ interface TradesStatisticsProps {
 
 export const TradesStatistics: FC<TradesStatisticsProps> = ({ trades }) => {
     const profit = trades.reduce((acc, trade) => acc + trade.profitLoss, 0)
-    const tradesWithoutNeutrals = trades.filter((trade) => trade.profitLoss > 5 || trade.profitLoss < -5)
+    const tradesWithoutNeutrals = trades.filter((trade) => trade.profitLoss > 10 || trade.profitLoss < -10)
     const winners = tradesWithoutNeutrals.filter((trade) => trade.profitLoss >= 0)
     const losers = tradesWithoutNeutrals.filter((trade) => trade.profitLoss < 0)
     const averageWinner =

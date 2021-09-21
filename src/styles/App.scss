@@ -54,13 +54,16 @@ h1.title {
 
 /** NAVBAR **/
 
+$navbarWidth: 48px;
+
 .navbar {
     background-color: $color-green-4;
     height: 100%;
+    position: fixed;
     align-content: space-between;
     display: flex;
     flex-flow: row wrap;
-    width: 48px;    
+    width: $navbarWidth;    
 
     .MuiSvgIcon-root {
         width: 40px;
@@ -100,6 +103,11 @@ h1.title {
             margin-top: 6px;
         }
     }
+}
+
+// necessary because the navbar is fixed.
+.main-content.MuiContainer-root {
+    margin-left: $navbarWidth;
 }
 
 .username {
