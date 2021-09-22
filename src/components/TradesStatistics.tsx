@@ -1,4 +1,4 @@
-import { Box, Grid } from '@material-ui/core'
+import { Box, Grid, Paper } from '@material-ui/core'
 import { FC } from 'react'
 import { TradeWithPL } from '../types'
 import { getProfitClass } from '../util/getProfitClass'
@@ -23,47 +23,49 @@ export const TradesStatistics: FC<TradesStatisticsProps> = ({ trades }) => {
             ? Math.round((winners.length / tradesWithoutNeutrals.length) * 100)
             : 0
     return (
-        <Grid item xs={6} className="content-box">
-            <Grid container>
-                <Grid item xs={4}>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Trades:</div>
-                        <div>{trades.length}</div>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Winning Trades:</div>
-                        <div>{winners.length}</div>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Losing Trades:</div>
-                        <div>{losers.length}</div>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Neutral Trades:</div>
-                        <div>{trades.length - tradesWithoutNeutrals.length}</div>
-                    </Box>
+        <Grid item xs={6}>
+            <Paper>
+                <Grid container>
+                    <Grid item xs={4}>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Trades:</div>
+                            <div>{trades.length}</div>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Winning Trades:</div>
+                            <div>{winners.length}</div>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Losing Trades:</div>
+                            <div>{losers.length}</div>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Neutral Trades:</div>
+                            <div>{trades.length - tradesWithoutNeutrals.length}</div>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={2} />
+                    <Grid item xs={4}>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Profit:</div>
+                            <div className={getProfitClass(profit)}>{roundTwo(profit)}</div>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Average Winner:</div>
+                            <div className={getProfitClass(averageWinner)}>{roundTwo(averageWinner)}</div>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Average Loser:</div>
+                            <div className={getProfitClass(averageLoser)}>{roundTwo(averageLoser)}</div>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <div>Win Percentage:</div>
+                            <div>{winPercentage}%</div>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={2} />
                 </Grid>
-                <Grid item xs={2} />
-                <Grid item xs={4}>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Profit:</div>
-                        <div className={getProfitClass(profit)}>{roundTwo(profit)}</div>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Average Winner:</div>
-                        <div className={getProfitClass(averageWinner)}>{roundTwo(averageWinner)}</div>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Average Loser:</div>
-                        <div className={getProfitClass(averageLoser)}>{roundTwo(averageLoser)}</div>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                        <div>Win Percentage:</div>
-                        <div>{winPercentage}%</div>
-                    </Box>
-                </Grid>
-                <Grid item xs={2} />
-            </Grid>
+            </Paper>
         </Grid>
     )
 }

@@ -6,8 +6,8 @@ import { ISOtoStandard } from '../../util/ISOtoStandard'
 import { TradesTableFooter } from './TradesTableFooter'
 
 interface TradesTableProps {
-    selectedIds: number[],
-    setSelectedIds: (selectedIds: number[]) => void,
+    selectedIds: number[]
+    setSelectedIds: (selectedIds: number[]) => void
     trades: TradeWithPL[]
 }
 
