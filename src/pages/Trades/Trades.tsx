@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import ImportTradesDialog from './ImportTradesDialog'
 import { Trade, useTradesQuery } from '../../generated/graphql'
 import moment from 'moment'
-import { Grid, Paper, TextField } from '@material-ui/core'
+import { Paper, TextField } from '@material-ui/core'
 import { condenseTrades } from '../../util/condenseTrades'
 import { TradesTable } from './TradesTable'
 import { TradesStatistics } from '../../components/TradesStatistics'
@@ -51,42 +51,42 @@ const Trades: FC = () => {
     return (
         <div>
             <Paper className="paper">
-                <h1 className="title">Trades</h1>
-                <button
-                    className="button small link"
-                    style={{ marginLeft: '60px' }}
-                    onClick={() => setShowImportDialog(true)}
-                >
-                    Import
-                </button>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div>
+                        <h1 className="title">Trades</h1>
+                        <button
+                            className="button small link"
+                            style={{ marginLeft: '60px' }}
+                            onClick={() => setShowImportDialog(true)}
+                        >
+                            Import
+                        </button>
+                    </div>
+                    <div>
+                        <TextField
+                            className="hide-label"
+                            label="Start Date"
+                            defaultValue={startDate}
+                            value={startDate}
+                            onChange={(e) => handleStartDateChange(e.target.value)}
+                            type="date"
+                            InputLabelProps={{ shrink: false }}
+                        />
+                        <ArrowForward className="date-arrow" />
+                        <TextField
+                            className="hide-label"
+                            label="End Date"
+                            defaultValue={endDate}
+                            value={endDate}
+                            onChange={(e) => handleEndDateChange(e.target.value)}
+                            type="date"
+                            InputLabelProps={{ shrink: false }}
+                        />
+                    </div>
+                </div>
             </Paper>
             <div>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <Paper className="paper">
-                            <TextField
-                                className="hide-label"
-                                label="Start Date"
-                                defaultValue={startDate}
-                                value={startDate}
-                                onChange={(e) => handleStartDateChange(e.target.value)}
-                                type="date"
-                                InputLabelProps={{ shrink: false }}
-                            />
-                            <ArrowForward className="date-arrow" />
-                            <TextField
-                                className="hide-label"
-                                label="End Date"
-                                defaultValue={endDate}
-                                value={endDate}
-                                onChange={(e) => handleEndDateChange(e.target.value)}
-                                type="date"
-                                InputLabelProps={{ shrink: false }}
-                            />
-                        </Paper>
-                    </Grid>
-                    <TradesStatistics trades={condensedTrades} />
-                </Grid>
+                <TradesStatistics trades={condensedTrades} />
                 <TradesTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} trades={condensedTrades} />
                 <ImportTradesDialog
                     open={showImportDialog}

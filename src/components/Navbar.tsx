@@ -2,7 +2,7 @@ import { Box, Menu, MenuItem } from '@material-ui/core'
 import { FC, useState, MouseEvent } from 'react'
 import { useLogoutMutation, useMeQuery } from '../generated/graphql'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { AccountCircle, Assessment, ViewList } from '@material-ui/icons'
+import { AccountCircle, Event, ViewList } from '@material-ui/icons'
 import { useApolloClient } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 
@@ -42,7 +42,7 @@ const Navbar: FC = () => {
             <Box className="navbar">
                 <div className="nav">
                     <Link to="/">
-                        <Assessment className={getActiveClass('/')} />
+                        <Event className={getActiveClass('/')} />
                     </Link>
                     <Link to="/trades">
                         <ViewList className={getActiveClass('/trades')} />

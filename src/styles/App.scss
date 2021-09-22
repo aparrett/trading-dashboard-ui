@@ -18,6 +18,7 @@ a {
 
 input[type="date"] {
     cursor: pointer;
+    padding: 4px 0;
 }
 
 body {
@@ -188,6 +189,10 @@ button {
     box-shadow: none!important;
 }
 
+.paper .fc .fc-today-button {
+    padding: 6px 12px!important;
+}
+
 .paper .fc .fc-today-button:active {
     background-color: $color-green-6!important;
 }
@@ -313,8 +318,9 @@ input[type="date"] {
 
 
 /** Misc **/
-.date-arrow {
+.MuiSvgIcon-root.date-arrow {
     color: $color-green-7;
     font-size: 20px;
-    margin: 4px 8px;
+    margin: 2px 8px 0 8px;
+    height: 22px;
 }
