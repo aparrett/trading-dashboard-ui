@@ -7,6 +7,7 @@ import { condenseTrades } from '../../util/condenseTrades'
 import { TradesTable } from './TradesTable'
 import { TradesStatistics } from '../../components/TradesStatistics'
 import './Trades.scss'
+import { ArrowForward } from '@material-ui/icons'
 
 const Trades: FC = () => {
     const [showImportDialog, setShowImportDialog] = useState(false)
@@ -49,37 +50,39 @@ const Trades: FC = () => {
 
     return (
         <div>
-            <Paper>
+            <Paper className="paper">
                 <h1 className="title">Trades</h1>
+                <button
+                    className="button small link"
+                    style={{ marginLeft: '60px' }}
+                    onClick={() => setShowImportDialog(true)}
+                >
+                    Import
+                </button>
             </Paper>
             <div>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <Paper>
+                        <Paper className="paper">
                             <TextField
+                                className="hide-label"
                                 label="Start Date"
                                 defaultValue={startDate}
                                 value={startDate}
                                 onChange={(e) => handleStartDateChange(e.target.value)}
                                 type="date"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: false }}
                             />
+                            <ArrowForward className="date-arrow" />
                             <TextField
+                                className="hide-label"
                                 label="End Date"
                                 defaultValue={endDate}
                                 value={endDate}
                                 onChange={(e) => handleEndDateChange(e.target.value)}
                                 type="date"
-                                InputLabelProps={{ shrink: true }}
-                                style={{ marginLeft: '20px' }}
+                                InputLabelProps={{ shrink: false }}
                             />
-                            <button
-                                className="button light link"
-                                style={{ marginLeft: '40px', marginTop: '2px' }}
-                                onClick={() => setShowImportDialog(true)}
-                            >
-                                Import
-                            </button>
                         </Paper>
                     </Grid>
                     <TradesStatistics trades={condensedTrades} />

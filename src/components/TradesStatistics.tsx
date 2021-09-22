@@ -24,7 +24,7 @@ export const TradesStatistics: FC<TradesStatisticsProps> = ({ trades }) => {
             : 0
     return (
         <Grid item xs={6}>
-            <Paper>
+            <Paper className="paper">
                 <Grid container>
                     <Grid item xs={4}>
                         <Box display="flex" justifyContent="space-between">

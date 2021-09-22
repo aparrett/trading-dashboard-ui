@@ -10,6 +10,7 @@ import moment from 'moment'
 import { getProfitClass } from '../../util/getProfitClass'
 import { roundTwo } from '../../util/roundPenny'
 import { TradesStatistics } from '../../components/TradesStatistics'
+import { Paper } from '@material-ui/core'
 
 const Overview: FC = () => {
     const [currentMonth, setCurrentMonth] = useState<number>()
@@ -47,16 +48,19 @@ const Overview: FC = () => {
 
     return (
         <div>
-            <h1 className="title">Overview</h1>
+            <Paper className="paper">
+                <h1 className="title">Overview</h1>
+            </Paper>
             <TradesStatistics trades={filteredTrades} />
-            <br />
-            <FullCalendar
-                showNonCurrentDates={false}
-                plugins={[dayGridPlugin]}
-                initialView="dayGridMonth"
-                events={events}
-                datesSet={(info) => setCurrentMonth(info.start.getMonth())}
-            />
+            <Paper className="paper">
+                <FullCalendar
+                    showNonCurrentDates={false}
+                    plugins={[dayGridPlugin]}
+                    initialView="dayGridMonth"
+                    events={events}
+                    datesSet={(info) => setCurrentMonth(info.start.getMonth())}
+                />
+            </Paper>
         </div>
     )
 }

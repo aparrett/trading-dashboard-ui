@@ -46,6 +46,7 @@ body {
 h1.title {
     font-size:18px;
     color: $color-green-6;
+    display: inline;
     margin: 0;
 }
 
@@ -130,20 +131,25 @@ button {
     border: none!important;
 }
 
-.button {
+.button, .paper .fc .fc-button-primary, .paper .fc .fc-button-primary:disabled {
     padding: 12px;
     font-size: 14px;
     color: #fff;
     font-weight: bold;
     background-color: $color-green-4;
+    border-radius: 2px;
+
+    &.small {
+        padding: 6px 12px;
+    }
 
     &.full {
         width: 100%;
     }
 
-    &:hover {
+    &:hover, &:active {
         cursor: pointer;
-        background-color: $color-green-3;
+        background-color: $color-green-6;
     }
 
     &.light {
@@ -174,6 +180,34 @@ button {
     }
 }
 
+.fc .fc-button-primary, .fc .fc-button-primary:disabled {
+    opacity: 1!important;
+}
+
+.paper .fc .fc-button-primary:focus {
+    box-shadow: none!important;
+}
+
+.paper .fc .fc-today-button:active {
+    background-color: $color-green-6!important;
+}
+
+.paper .fc .fc-button-primary.fc-prev-button, .paper .fc .fc-button-primary.fc-next-button {
+    background-color: inherit;
+
+    .fc-icon {
+        color: $color-green-7;
+    }
+
+    &:focus {
+        box-shadow: none!important;
+    }
+
+    &:active {
+        background-color: #fff!important;
+    }
+}
+
 /** DIALOGS **/
 
 .MuiDialog-container {
@@ -193,21 +227,47 @@ button {
     }
 }
 
-.MuiInput-underline:before {
-    border-bottom: 2px solid $color-green-3!important;
+/** Forms **/
+
+// Remove the blue background from chrome when auto-filling
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+}
+
+.MuiInput-underline:before, 
+.MuiInput-underline:after {
+    border-bottom: 1px solid $color-green-7!important;
 }
 
 .MuiFormLabel-root.Mui-focused {
-    color: $color-green-4!important;
+    color: $color-green-7!important;
     font-weight: bold!important;
-}
-
-.MuiInput-underline:after { 
-    border-bottom: 2px solid $color-green-4!important;
 }
 
 .MuiDialog-paperWidthSm {
     max-width: 810px!important;
+}
+
+input[type="date"] {
+    width: 140px;
+}
+
+.MuiTextField-root.hide-label  {
+    .MuiInputBase-formControl {
+        margin-top: 0;
+    }
+
+    label {
+        display: none;
+    }
 }
 
 /* Snackbar */
@@ -238,7 +298,7 @@ button {
 }
 
 // Content rectangles.
-.MuiPaper-root {
+.MuiPaper-root.paper {
     margin-top: 15px;
     background-color: #fff;
     padding: 10px 15px;
@@ -249,4 +309,12 @@ button {
     display: flex;
     align-items: center;
     height: 100%;
+}
+
+
+/** Misc **/
+.date-arrow {
+    color: $color-green-7;
+    font-size: 20px;
+    margin: 4px 8px;
 }
