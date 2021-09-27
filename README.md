@@ -15,6 +15,7 @@ An app for analyzing financial trades. Click [here](https://www.daytradingdashbo
   
 ### TODO
 - Better validation (hardly any exists at the moment for anything)
+- Bugfix: the app doesn't work in mobile browsers
 - Hover text on menu items
 - Allow user to import a variety of broker formats
 - Convert Import JSON to its own page and add helpful information
