@@ -63,18 +63,20 @@ const ImportTradesCSV: FC<ImportTradesCSVProps> = ({ onClose }) => {
             <DialogContent>
                 <div style={{ margin: '0 25px', maxWidth: '810px' }}>
                     <input type="file" ref={inputFile} style={{ display: 'none' }} onChange={handleFileChange} />
-                    <button type="button" className="button outlined-light" onClick={handleSelectFileClick}>
+                    <button type="button" className="button small" onClick={handleSelectFileClick}>
                         Select File
                     </button>
-                    {fileNames.map((fileName) => <div style={{ marginTop: '15px' }}>{fileName}</div>)}
+                    {fileNames.map((fileName) => (
+                        <div style={{ marginTop: '15px' }}>{fileName}</div>
+                    ))}
                 </div>
             </DialogContent>
             <DialogActions>
                 <button className="button link light" type="reset" onClick={onClose}>
-                    CANCEL
+                    Cancel
                 </button>
-                <button className="button link dark" type="submit">
-                    IMPORT
+                <button className="button link" type="submit">
+                    Import
                 </button>
             </DialogActions>
         </form>

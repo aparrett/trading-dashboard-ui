@@ -154,29 +154,10 @@ button {
     }
 
     &.light {
-        background-color: $color-green-7;
+        background-color: $color-green-8;
         color: $color-green-2;
         &:hover {
-            background-color: $color-green-8;
-        }
-    }
-
-    &.dark {
-        background-color: $color-green-4;
-        color: $color-green;
-        &:hover {
-            color: $color-green-6;
-        }
-    }
-
-    &.outlined-light {
-        background-color: $color-green;
-        border-color: $color-green;
-        border: 1px solid $color-green-3!important;
-        color: $color-green-5;
-        &:hover {
-            color: $color-red-light;
-            border-color: $color-red-light!important;
+            background-color: $color-green-7;
         }
     }
 }
@@ -221,7 +202,7 @@ button {
     }
 
     .MuiDialog-paper {
-        background-color: $color-green;
+        background-color: #fff;
         box-shadow: none;
         border-radius: 0;
         transition: none;
@@ -279,6 +260,7 @@ input[type="date"] {
 
 .MuiCollapse-root.MuiCollapse-entered {
     margin-bottom: 10px;
+    margin-left: 28px;
 }
 
 .MuiCollapse-wrapper {
@@ -290,7 +272,7 @@ input[type="date"] {
     }
 
     .snackbar-success {
-        background-color: $color-green-4;
+        background-color: $color-green-7;
     }
 
     .snackbar-error {

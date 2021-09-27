@@ -94,10 +94,10 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose, selectedStartDat
             </DialogContent>
             <DialogActions>
                 <button className="button link light" type="reset" onClick={onClose}>
-                    CANCEL
+                    Cancel
                 </button>
-                <button className="button link dark" type="submit">
-                    IMPORT
+                <button className="button link" type="submit">
+                    Import
                 </button>
             </DialogActions>
         </form>
