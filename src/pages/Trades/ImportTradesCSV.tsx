@@ -62,6 +62,7 @@ const ImportTradesCSV: FC<ImportTradesCSVProps> = ({ onClose }) => {
         <form onSubmit={formik.handleSubmit}>
             <DialogContent>
                 <div style={{ margin: '0 25px', maxWidth: '810px' }}>
+                    <p>This app only supports TradeZero headers when importing via CSV.</p>
                     <input type="file" ref={inputFile} style={{ display: 'none' }} onChange={handleFileChange} />
                     <button type="button" className="button small" onClick={handleSelectFileClick}>
                         Select File
