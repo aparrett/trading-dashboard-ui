@@ -33,7 +33,7 @@ const Register: FC = () => {
                 setErrors(toErrorMap(errors))
             } else if (user) {
                 resetForm()
-                history.replace(location.state?.from || '/')
+                history.replace(location.state?.from || '/trades')
             }
         }
     })
