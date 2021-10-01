@@ -41,14 +41,14 @@ const Navbar: FC = () => {
         <div>
             <Box className="navbar">
                 <div className="nav">
-                    <Link to="/">
+                    <Link to="/" title="Overview">
                         <Event className={getActiveClass('/')} />
                     </Link>
-                    <Link to="/trades">
+                    <Link to="/trades" title="Trades">
                         <ViewList className={getActiveClass('/trades')} />
                     </Link>
                 </div>
-                <div className="nav-account">
+                <div className="nav-account" title="Account">
                     <AccountCircle onClick={handleAccountMenuClick} />
                     <Menu
                         anchorEl={accountMenuAnchor}
