@@ -18,7 +18,7 @@ const Overview: FC = () => {
     const trades = tradesData?.trades || []
 
     // Create a map of dates to profit losses.
-    const dateMap: { [x: string]: number } = {}
+    const dateMap: Record<string, number> = {}
     const condensedTrades = condenseTrades(trades as Trade[])
     condensedTrades.forEach((trade) => {
         const { entry, close, quantity, side } = trade

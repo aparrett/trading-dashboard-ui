@@ -7,6 +7,7 @@ import moment from 'moment'
 import { formatImportDate } from '../../util/formatImportDate'
 import { translateSide } from '../../util/csvRowToTrade'
 import { roundThree } from '../../util/roundPenny'
+import { FileCopyOutlined } from '@material-ui/icons'
 
 interface ImportTradesJSONProps {
     onClose: () => void
@@ -65,12 +66,24 @@ const ImportTradesJSON: FC<ImportTradesJSONProps> = ({ onClose, selectedStartDat
         4
     )
 
+    const handleCopyToClipboardClick = async () => {
+        try {
+            await navigator.clipboard.writeText(example)
+            enqueueSnackbar('Copied to clipboard!', { variant: 'success' })
+        } catch {
+            enqueueSnackbar('Unable to copy to clipboard.', { variant: 'error' })
+        }
+    }
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <DialogContent>
                 <Grid container className="import-trades-json-container">
                     <Grid item xs={6}>
-                        <div>Example</div>
+                        <div>
+                            Example
+                            <FileCopyOutlined className="copy-to-clipboard-btn" onClick={handleCopyToClipboardClick} />
+                        </div>
                         <pre>{example}</pre>
                     </Grid>
                     <Grid item xs={6}>
