@@ -1,0 +1,631 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-6"
+      >
+        <div
+          class="MuiPaper-root paper MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+            >
+              <div
+                class="MuiBox-root MuiBox-root-1"
+              >
+                <div>
+                  Trades:
+                </div>
+                <div
+                  data-testid="tradesCount"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-2"
+              >
+                <div>
+                  Winning Trades:
+                </div>
+                <div
+                  data-testid="winningTradesCount"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-3"
+              >
+                <div>
+                  Losing Trades:
+                </div>
+                <div
+                  data-testid="losingTradesCount"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-4"
+              >
+                <div>
+                  Neutral Trades:
+                </div>
+                <div
+                  data-testid="neutralTradesCount"
+                >
+                  0
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+            />
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+            >
+              <div
+                class="MuiBox-root MuiBox-root-5"
+              >
+                <div>
+                  Profit:
+                </div>
+                <div
+                  class=""
+                  data-testid="profit"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-6"
+              >
+                <div>
+                  Average Winner:
+                </div>
+                <div
+                  class=""
+                  data-testid="avgWinner"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-7"
+              >
+                <div>
+                  Average Loser:
+                </div>
+                <div
+                  class=""
+                  data-testid="avgLoser"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-8"
+              >
+                <div>
+                  Win Percentage:
+                </div>
+                <div
+                  data-testid="winPerc"
+                >
+                  0
+                  %
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-6"
+    >
+      <div
+        class="MuiPaper-root paper MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <div
+              class="MuiBox-root MuiBox-root-1"
+            >
+              <div>
+                Trades:
+              </div>
+              <div
+                data-testid="tradesCount"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-2"
+            >
+              <div>
+                Winning Trades:
+              </div>
+              <div
+                data-testid="winningTradesCount"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-3"
+            >
+              <div>
+                Losing Trades:
+              </div>
+              <div
+                data-testid="losingTradesCount"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-4"
+            >
+              <div>
+                Neutral Trades:
+              </div>
+              <div
+                data-testid="neutralTradesCount"
+              >
+                0
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+          />
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <div
+              class="MuiBox-root MuiBox-root-5"
+            >
+              <div>
+                Profit:
+              </div>
+              <div
+                class=""
+                data-testid="profit"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-6"
+            >
+              <div>
+                Average Winner:
+              </div>
+              <div
+                class=""
+                data-testid="avgWinner"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-7"
+            >
+              <div>
+                Average Loser:
+              </div>
+              <div
+                class=""
+                data-testid="avgLoser"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-8"
+            >
+              <div>
+                Win Percentage:
+              </div>
+              <div
+                data-testid="winPerc"
+              >
+                0
+                %
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renders correctly with a trade 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-6"
+      >
+        <div
+          class="MuiPaper-root paper MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+            >
+              <div
+                class="MuiBox-root MuiBox-root-9"
+              >
+                <div>
+                  Trades:
+                </div>
+                <div
+                  data-testid="tradesCount"
+                >
+                  1
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-10"
+              >
+                <div>
+                  Winning Trades:
+                </div>
+                <div
+                  data-testid="winningTradesCount"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-11"
+              >
+                <div>
+                  Losing Trades:
+                </div>
+                <div
+                  data-testid="losingTradesCount"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-12"
+              >
+                <div>
+                  Neutral Trades:
+                </div>
+                <div
+                  data-testid="neutralTradesCount"
+                >
+                  1
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+            />
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+            >
+              <div
+                class="MuiBox-root MuiBox-root-13"
+              >
+                <div>
+                  Profit:
+                </div>
+                <div
+                  class="green"
+                  data-testid="profit"
+                >
+                  1
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-14"
+              >
+                <div>
+                  Average Winner:
+                </div>
+                <div
+                  class=""
+                  data-testid="avgWinner"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-15"
+              >
+                <div>
+                  Average Loser:
+                </div>
+                <div
+                  class=""
+                  data-testid="avgLoser"
+                >
+                  0
+                </div>
+              </div>
+              <div
+                class="MuiBox-root MuiBox-root-16"
+              >
+                <div>
+                  Win Percentage:
+                </div>
+                <div
+                  data-testid="winPerc"
+                >
+                  0
+                  %
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-6"
+    >
+      <div
+        class="MuiPaper-root paper MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <div
+              class="MuiBox-root MuiBox-root-9"
+            >
+              <div>
+                Trades:
+              </div>
+              <div
+                data-testid="tradesCount"
+              >
+                1
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-10"
+            >
+              <div>
+                Winning Trades:
+              </div>
+              <div
+                data-testid="winningTradesCount"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-11"
+            >
+              <div>
+                Losing Trades:
+              </div>
+              <div
+                data-testid="losingTradesCount"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-12"
+            >
+              <div>
+                Neutral Trades:
+              </div>
+              <div
+                data-testid="neutralTradesCount"
+              >
+                1
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+          />
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <div
+              class="MuiBox-root MuiBox-root-13"
+            >
+              <div>
+                Profit:
+              </div>
+              <div
+                class="green"
+                data-testid="profit"
+              >
+                1
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-14"
+            >
+              <div>
+                Average Winner:
+              </div>
+              <div
+                class=""
+                data-testid="avgWinner"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-15"
+            >
+              <div>
+                Average Loser:
+              </div>
+              <div
+                class=""
+                data-testid="avgLoser"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-16"
+            >
+              <div>
+                Win Percentage:
+              </div>
+              <div
+                data-testid="winPerc"
+              >
+                0
+                %
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2"
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
