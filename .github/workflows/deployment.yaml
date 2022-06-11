@@ -11,44 +11,43 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git
+        uses: actions/checkout@v2
 
-  steps:
-    - name: Checkout Git
-      uses: actions/checkout@v2
+      - name: Configure Git
+        shell: bash
+        run: |
+          git config --global user.email github-actions@github.com
+          git config --global user.name github-actions
+      
+      - name: Install dependencies
+        shell: bash
+        run: npm ci
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.REGION }}
 
-    - name: Configure Git
-      shell: bash
-      run: |
-        git config --global user.email github-actions@github.com
-        git config --global user.name github-actions
-    
-    - name: Install dependencies
-      shell: bash
-      run: npm ci
-    
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with: 
-        aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
-        aws-region: ${{ env.REGION }}
-
-    - name: Deploy CloudFront Distribution using AWS CloudFormation
-      id: deploy_cf
-      uses: aws-actions/aws-cloudformation-github-deploy@v1
-      with:
-        name: trading-dashboard-cloudfront-prod
-        template: ./cf-template.yml
-        no-fail-on-empty-changeset: '1'
-    
-    - name: Build App, Deploy Files to S3, and Invalidate the Distribution's Cache
-      shell: bash
-      run: |
-        CI=false npm run build
-        npx deploy-aws-s3-cloudfront@3.6.0 --non-interactive \
-          --bucket aparrett-ui-prod \
-          --source ./build
-          --destination "/trading-dashboard" \
-          --cache-control *:no-cache \
-          --distribution ${{ steps.deploy_cf.outputs.CfDistributionId }} \
-          --invalidation-path "/trading-dashboard/*"
+      - name: Deploy CloudFront Distribution using AWS CloudFormation
+        id: deploy_cf
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: trading-dashboard-cloudfront-prod
+          template: ./cf-template.yml
+          no-fail-on-empty-changeset: '1'
+      
+      - name: Build App, Deploy Files to S3, and Invalidate the Distribution's Cache
+        shell: bash
+        run: |
+          CI=false npm run build
+          npx deploy-aws-s3-cloudfront@3.6.0 --non-interactive \
+            --bucket aparrett-ui-prod \
+            --source ./build
+            --destination "/trading-dashboard" \
+            --cache-control *:no-cache \
+            --distribution ${{ steps.deploy_cf.outputs.CfDistributionId }} \
+            --invalidation-path "/trading-dashboard/*"
