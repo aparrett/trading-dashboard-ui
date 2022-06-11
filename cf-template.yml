@@ -6,11 +6,11 @@ Resources:
     Type: "AWS::CloudFront::Distribution"
     Properties:
       DistributionConfig:
-      CustomErrorResponses:
-        - ErrorCode: '404'
-          ResponsePagePath: '/index.html'
-          ResponseCode: '200'
-          ErrorCachingMinTTL: '10'
+        CustomErrorResponses:
+          - ErrorCode: '404'
+            ResponsePagePath: '/index.html'
+            ResponseCode: '200'
+            ErrorCachingMinTTL: '10'
         DefaultCacheBehavior:
           AllowedMethods:
             - 'HEAD'
