@@ -21,6 +21,11 @@ jobs:
           git config --global user.email github-actions@github.com
           git config --global user.name github-actions
       
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+
       - name: Install dependencies
         shell: bash
         run: npm i --force
