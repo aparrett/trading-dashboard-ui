@@ -23,7 +23,7 @@ jobs:
       
       - name: Install dependencies
         shell: bash
-        run: npm ci
+        run: yarn install
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -43,7 +43,7 @@ jobs:
       - name: Build App, Deploy Files to S3, and Invalidate the Distribution's Cache
         shell: bash
         run: |
-          CI=false npm run build
+          CI=false yarn build
           npx deploy-aws-s3-cloudfront@3.6.0 --non-interactive \
             --bucket aparrett-ui-prod \
             --source ./build
