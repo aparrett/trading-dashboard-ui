@@ -23,7 +23,7 @@ jobs:
       
       - name: Install dependencies
         shell: bash
-        run: npm i
+        run: npm i --force
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
