@@ -1,5 +1,5 @@
 # Trading Dashboard
-An app for analyzing financial trades. Click [here](https://www.daytradingdashboard.com/) to start.
+An app for analyzing financial trades. Click [here](https://d33q9sffuin3mg.cloudfront.net) to start.
 
 ### Features
 - Overview
